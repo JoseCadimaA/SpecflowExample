@@ -1,0 +1,10 @@
+﻿2020-10-16T21:19:40.2954514-04:00;Thread#1;Info;Reading test run result from Json file "C:\Users\usuario\AppData\Local\Temp\tmpEE9D.tmp".
+2020-10-16T21:19:40.3054600-04:00;Thread#1;Info;Successfully read test run result from Json file "C:\Users\usuario\AppData\Local\Temp\tmpEE9D.tmp"
+2020-10-16T21:19:40.3054600-04:00;Thread#1;Info;Deserializing test run result
+2020-10-16T21:19:41.0179313-04:00;Thread#1;Info;Successfully deserialized test run result
+2020-10-16T21:19:41.0179313-04:00;Thread#1;Info;Loading test run result
+2020-10-16T21:19:41.0499546-04:00;Thread#1;Info;Successfully loaded test run result
+2020-10-16T21:19:41.0689656-04:00;Thread#1;Info;creating 1 report(s)
+2020-10-16T21:19:41.0689656-04:00;Thread#1;Info;generate Report E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\ReportTemplate.cshtml
+2020-10-16T21:19:42.0996468-04:00;Thread#1;Info;Finished generating reports.
+========== End of log file ==========

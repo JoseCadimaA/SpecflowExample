@@ -1,0 +1,648 @@
+﻿2020-10-16T21:12:31.1338750-04:00;VSTestExecutionThread;Info;SpecFlow+Runner execution started
+2020-10-16T21:12:31.1341434-04:00;VSTestExecutionThread;Info;SpecFlow+Runner 3.4.19 in Framework netcore31 in x86 mode execution started
+2020-10-16T21:12:31.1341470-04:00;VSTestExecutionThread;Info;TestAdapter Location: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll
+2020-10-16T21:12:31.1362778-04:00;VSTestExecutionThread;Info;Current UserName: 'Caribe', MachineName: 'JOSE-CADIMA-PC'
+2020-10-16T21:12:31.3564094-04:00;VSTestExecutionThread;Info;SpecRun: running tests in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\BookShop.AcceptanceTests.dll
+2020-10-16T21:12:31.3567773-04:00;VSTestExecutionThread;Info;Output folder configured to "E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\TestResults" (default)
+2020-10-16T21:12:31.3569253-04:00;VSTestExecutionThread;Info;Profile: BookShop.AcceptanceTests
+2020-10-16T21:12:31.4004244-04:00;VSTestExecutionThread;Info;Log file path: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\TestResults\BookShop.AcceptanceTests_BookShop.AcceptanceTests_2020-10-16T211231.log
+2020-10-16T21:12:31.4083792-04:00;Thread#12;Info;Checking activation
+2020-10-16T21:12:31.5120394-04:00;Thread#12;Info;Activated.
+2020-10-16T21:12:31.5124468-04:00;Thread#12;Info;Activation check completed
+2020-10-16T21:12:31.5126402-04:00;Thread#12;Info;Starting test run
+2020-10-16T21:12:31.6269150-04:00;Thread#12;Info;Discovering target: Integrated
+2020-10-16T21:12:31.6276046-04:00;Thread#12;Info;Discovering tests from assembly: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\BookShop.AcceptanceTests.dll
+2020-10-16T21:12:31.7996648-04:00;Thread#12;Info;Discovered tests from assembly: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\BookShop.AcceptanceTests.dll
+2020-10-16T21:12:31.8016890-04:00:Test Suite Dump
+2020-10-16T21:12:31.8047285-04:00:#0: BookShop.AcceptanceTests/BookShop.AcceptanceTests - 
+2020-10-16T21:12:31.8047755-04:00:#1: Integrated - 
+2020-10-16T21:12:31.8047854-04:00:#2: BookShop.AcceptanceTests - 
+2020-10-16T21:12:31.8047936-04:00:#3: Displaying book details - 
+2020-10-16T21:12:31.8047992-04:00:#5: Searching for books - 
+2020-10-16T21:12:31.8048055-04:00:#12: Desplegar libros en la pantalla - 
+2020-10-16T21:12:31.8048110-04:00:#16: Adding books to the shopping cart - 
+2020-10-16T21:12:31.8048157-04:00:#19: Displaying the shopping cart - 
+2020-10-16T21:12:31.8048209-04:00:#22: Editing the shopping cart - 
+2020-10-16T21:12:31.8048252-04:00:#25: Removing books from the shopping cart - 
+2020-10-16T21:12:31.8048296-04:00:#27: Prepare book catalog - 
+2020-10-16T21:12:31.8071763-04:00:#4: The author, the title and the price of a book can be seen - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Displaying+book+details/Scenario:The+author%2c+the+title+and+the+price+of+a+book+can+be+seen
+2020-10-16T21:12:31.8072477-04:00:#6: Title should be matched - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Title+should+be+matched
+2020-10-16T21:12:31.8073034-04:00:#7: Author should be matched - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Author+should+be+matched
+2020-10-16T21:12:31.8073291-04:00:#8: Space should be treated as multiple OR search - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Space+should+be+treated+as+multiple+OR+search
+2020-10-16T21:12:31.8073523-04:00:#9: Search result should be ordered by book title - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Search+result+should+be+ordered+by+book+title
+2020-10-16T21:12:31.8073914-04:00:#10: Simple search (scenario outline syntax), Domain - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Simple+search+(scenario+outline+syntax)%2c+Domain
+2020-10-16T21:12:31.8074167-04:00:#11: Simple search (scenario outline syntax), Windows Communication - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Searching+for+books/Scenario:Simple+search+(scenario+outline+syntax)%2c+Windows+Communication
+2020-10-16T21:12:31.8074597-04:00:#13: Cheapest 3 books should be listed on the home screen - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Desplegar+libros+en+la+pantalla/Scenario:Cheapest+3+books+should+be+listed+on+the+home+screen
+2020-10-16T21:12:31.8074968-04:00:#14: Cheapest 3 books should be listed on the home screen (list syntax) - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Desplegar+libros+en+la+pantalla/Scenario:Cheapest+3+books+should+be+listed+on+the+home+screen+(list+syntax)
+2020-10-16T21:12:31.8075225-04:00:#15: Cheapest 3 books should be listed on the home screen (table syntax) - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Desplegar+libros+en+la+pantalla/Scenario:Cheapest+3+books+should+be+listed+on+the+home+screen+(table+syntax)
+2020-10-16T21:12:31.8075734-04:00:#17: Books can be placed into shopping cart - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Adding+books+to+the+shopping+cart/Scenario:Books+can+be+placed+into+shopping+cart
+2020-10-16T21:12:31.8076038-04:00:#18: Adding the same book to shopping cart again should increase quantity - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Adding+books+to+the+shopping+cart/Scenario:Adding+the+same+book+to+shopping+cart+again+should+increase+quantity
+2020-10-16T21:12:31.8076433-04:00:#20: Shopping cart should show total number of items and total price - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Displaying+the+shopping+cart/Scenario:Shopping+cart+should+show+total+number+of+items+and+total+price
+2020-10-16T21:12:31.8076662-04:00:#21: The shopping cart should be initially empty - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Displaying+the+shopping+cart/Scenario:The+shopping+cart+should+be+initially+empty
+2020-10-16T21:12:31.8077052-04:00:#23: Quantity of a book can be changed - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Editing+the+shopping+cart/Scenario:Quantity+of+a+book+can+be+changed
+2020-10-16T21:12:31.8077293-04:00:#24: Changing quantity of book to 0 should remove book from shopping cart - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Editing+the+shopping+cart/Scenario:Changing+quantity+of+book+to+0+should+remove+book+from+shopping+cart
+2020-10-16T21:12:31.8077771-04:00:#26: A type of book can be entirely removed from the shopping cart - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Removing+books+from+the+shopping+cart/Scenario:A+type+of+book+can+be+entirely+removed+from+the+shopping+cart
+2020-10-16T21:12:31.8077992-04:00:#28: Setup basic example books - Target:Integrated/TestAssembly:BookShop.AcceptanceTests/Feature:Prepare+book+catalog/Scenario:Setup+basic+example+books
+2020-10-16T21:12:31.8079066-04:00:End: Test Suite Dump
+2020-10-16T21:12:31.8339776-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:31.8365654-04:00:Thread#:Scheduler: testitem #4 from normal test queue 
+2020-10-16T21:12:31.8366515-04:00:Thread#0:Scheduler: considering testitem #4 for thread 0
+2020-10-16T21:12:31.8412782-04:00:Thread#0:TestItem#4:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:31.8412964-04:00:Thread#0:TestItem#4:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:31.8412995-04:00:Thread#0:TestItem#4:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:31.8413051-04:00:Thread#0:Scheduler: using testitem #4 for thread 0
+2020-10-16T21:12:31.8422402-04:00:Thread#0:Scheduler: Test #4 is scheduled for thread
+2020-10-16T21:12:31.8440821-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:31.8472566-04:00:Thread #0: creating new test thread executor for BookShop.AcceptanceTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null (target: Integrated)
+2020-10-16T21:12:31.8529317-04:00:Thread #0: Creating test assembly executor for execution model SharedAppDomain
+2020-10-16T21:12:31.8532369-04:00:Thread #0: Creating test assembly executor for execution model SharedAppDomain
+2020-10-16T21:12:31.8540422-04:00:Thread #0: using TechTalk.SpecRun.Framework.Execution.SharedAppDomain.SharedAppDomainTestAssemblyExecutorHost to execute tests
+2020-10-16T21:12:31.8666675-04:00:Assembly resolving TechTalk.SpecRun.Framework.Executor, Culture=neutral, PublicKeyToken=null
+2020-10-16T21:12:31.8707925-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' from .deps.json file
+2020-10-16T21:12:31.8708107-04:00:[AssemblyCache] Could not resolve 'TechTalk.SpecRun.Framework.Executor' from .deps.json
+2020-10-16T21:12:31.8723959-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:31.8732068-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\TechTalk.SpecRun.Framework.Executor.dll'
+2020-10-16T21:12:31.8734456-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\TechTalk.SpecRun.Framework.Executor.exe'
+2020-10-16T21:12:31.8735782-04:00:[AssemblyCache] Could not resolve 'TechTalk.SpecRun.Framework.Executor' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:31.8739516-04:00:TargetFramework: .NETCoreApp,Version=v3.1
+2020-10-16T21:12:31.8743104-04:00:Tfm: netcoreapp3.1
+2020-10-16T21:12:31.8743420-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:31.8743467-04:00:[AssemblyCache] Trying to resolve 'TechTalk.SpecRun.Framework.Executor' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\TechTalk.SpecRun.Framework.Executor.dll'
+2020-10-16T21:12:31.8744663-04:00:[AssemblyCache] Found file 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\TechTalk.SpecRun.Framework.Executor.dll' for assembly 'TechTalk.SpecRun.Framework.Executor'
+2020-10-16T21:12:31.8750454-04:00:[AssemblyCache] Resolved 'TechTalk.SpecRun.Framework.Executor' to E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\TechTalk.SpecRun.Framework.Executor.dll
+2020-10-16T21:12:32.1008629-04:00:Thread#0:T:-> Loading plugin E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\LivingDoc.SpecFlowPlugin.dll
+2020-10-16T21:12:32.1053361-04:00:Thread#0:T:-> Loading plugin E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecRun.Runtime.SpecFlowPlugin.dll
+2020-10-16T21:12:32.1111253-04:00:Thread#0:T:-> Using specflow.json
+2020-10-16T21:12:32.3114706-04:00:Thread#0: Test #4/0 is started on thread #0
+2020-10-16T21:12:32.8505748-04:00:Assembly resolving Microsoft.EntityFrameworkCore.resources, Version=3.1.8.0, Culture=es-ES, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:32.8506001-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' from .deps.json file
+2020-10-16T21:12:32.8506072-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' from .deps.json
+2020-10-16T21:12:32.8506166-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:32.8506234-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8507295-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8508214-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:32.8508278-04:00:TargetFramework: .NETCoreApp,Version=v3.1
+2020-10-16T21:12:32.8508463-04:00:Tfm: netcoreapp3.1
+2020-10-16T21:12:32.8508534-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:32.8508566-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8509647-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8510500-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:32.8691386-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:32.8691611-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8693790-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8695286-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:32.8700374-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:32.8700497-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8702044-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8703445-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:32.8707254-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:32.8707325-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8709121-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8710633-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:32.8713988-04:00:Assembly resolving Microsoft.EntityFrameworkCore.resources, Version=3.1.8.0, Culture=es-ES, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:32.8714107-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' from .deps.json file
+2020-10-16T21:12:32.8714162-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' from .deps.json
+2020-10-16T21:12:32.8714253-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:32.8714288-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8715583-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8716515-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:32.8716621-04:00:TargetFramework: .NETCoreApp,Version=v3.1
+2020-10-16T21:12:32.8716803-04:00:Tfm: netcoreapp3.1
+2020-10-16T21:12:32.8716866-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:32.8716906-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8717912-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8718788-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:32.8724792-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:32.8724919-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8726277-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8727611-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:32.8730469-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:32.8730588-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8731894-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8733145-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:32.8736106-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:32.8736189-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.resources.dll'
+2020-10-16T21:12:32.8737834-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.resources.exe'
+2020-10-16T21:12:32.8739315-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:32.8755326-04:00:Assembly resolving Microsoft.EntityFrameworkCore.resources, Version=3.1.8.0, Culture=es, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:32.8755582-04:00:Assembly resolving Microsoft.EntityFrameworkCore.resources, Version=3.1.8.0, Culture=es, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:33.6981405-04:00:Assembly resolving Microsoft.EntityFrameworkCore.InMemory.resources, Version=3.1.8.0, Culture=es-ES, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:33.6981587-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' from .deps.json file
+2020-10-16T21:12:33.6981623-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' from .deps.json
+2020-10-16T21:12:33.6981670-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:33.6981709-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.6982566-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.6983522-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:33.6983628-04:00:TargetFramework: .NETCoreApp,Version=v3.1
+2020-10-16T21:12:33.6983802-04:00:Tfm: netcoreapp3.1
+2020-10-16T21:12:33.6983861-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:33.6983916-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.6984698-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.6985610-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:33.6990765-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:33.6990844-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.6991937-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.6993006-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:33.6995450-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:33.6995525-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.6996539-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.6997526-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:33.7000088-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:33.7000163-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7001458-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7002674-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:33.7003049-04:00:Assembly resolving Microsoft.EntityFrameworkCore.InMemory.resources, Version=3.1.8.0, Culture=es-ES, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:33.7003085-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' from .deps.json file
+2020-10-16T21:12:33.7003120-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' from .deps.json
+2020-10-16T21:12:33.7003163-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:33.7003183-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7003850-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7004510-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1'
+2020-10-16T21:12:33.7004577-04:00:TargetFramework: .NETCoreApp,Version=v3.1
+2020-10-16T21:12:33.7004652-04:00:Tfm: netcoreapp3.1
+2020-10-16T21:12:33.7004683-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:33.7004703-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7005394-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7006049-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\SpecFlowPlusRunner\netcoreapp3.1'
+2020-10-16T21:12:33.7010273-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:33.7010348-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7011295-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7012302-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.1'
+2020-10-16T21:12:33.7014627-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:33.7014694-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7015645-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7016617-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.NETCore.App\3.1.1'
+2020-10-16T21:12:33.7019099-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:33.7019170-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.dll'
+2020-10-16T21:12:33.7020438-04:00:[AssemblyCache] Trying to resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' to 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1\Microsoft.EntityFrameworkCore.InMemory.resources.exe'
+2020-10-16T21:12:33.7021646-04:00:[AssemblyCache] Could not resolve 'Microsoft.EntityFrameworkCore.InMemory.resources' in folder 'C:\Program Files (x86)\dotnet\shared\Microsoft.WindowsDesktop.App\3.1.1'
+2020-10-16T21:12:33.7025280-04:00:Assembly resolving Microsoft.EntityFrameworkCore.InMemory.resources, Version=3.1.8.0, Culture=es, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:33.7025407-04:00:Assembly resolving Microsoft.EntityFrameworkCore.InMemory.resources, Version=3.1.8.0, Culture=es, PublicKeyToken=adb9793829ddae60
+2020-10-16T21:12:33.9515212-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:33.9515417-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:33.9515452-04:00:Thread#0:B:  | Author        | Title                              | Price |
+2020-10-16T21:12:33.9515480-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  | 50.20 |
+2020-10-16T21:12:33.9515515-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               | 46.34 |
+2020-10-16T21:12:33.9515543-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services | 31.49 |
+2020-10-16T21:12:33.9515563-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     | 24.75 |
+2020-10-16T21:12:34.0365674-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,1s)
+2020-10-16T21:12:34.0504180-04:00:Thread#0:B:When I open the details of 'Analysis Patterns'
+2020-10-16T21:12:34.2770387-04:00:Thread#0:T:done: BookSteps.WhenIOpenTheDetailsOfBook("Analysis Patterns") (0,2s)
+2020-10-16T21:12:34.2788150-04:00:Thread#0:B:Then the book details should show
+2020-10-16T21:12:34.2788265-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.2788281-04:00:Thread#0:B:  | Author        | Title             | Price |
+2020-10-16T21:12:34.2788292-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns | 50.20 |
+2020-10-16T21:12:34.2901677-04:00:Thread#0:T:done: BookSteps.ThenTheBookDetailsShouldShow(<table>) (0,0s)
+2020-10-16T21:12:34.3056530-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.3056968-04:00:Thread#:Scheduler: testitem #6 from normal test queue 
+2020-10-16T21:12:34.3057032-04:00:Thread#0:Scheduler: considering testitem #6 for thread 0
+2020-10-16T21:12:34.3057857-04:00:Thread#0:TestItem#6:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.3057959-04:00:Thread#0:TestItem#6:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.3057999-04:00:Thread#0:TestItem#6:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.3058050-04:00:Thread#0:Scheduler: using testitem #6 for thread 0
+2020-10-16T21:12:34.3058307-04:00:Thread#0:Scheduler: Test #6 is scheduled for thread
+2020-10-16T21:12:34.3058496-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.3330424-04:00:Thread#0: Test #4/0 is finished on thread #0 as Succeeded within 2,0199801 seconds
+2020-10-16T21:12:34.3356733-04:00:Thread#0: Test #6/0 is started on thread #0
+2020-10-16T21:12:34.3583558-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.3584774-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.3584861-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.3584892-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.3584932-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.3584960-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.3584983-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.3649768-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.3737428-04:00:Thread#0:B:When I search for books by the phrase 'Domain'
+2020-10-16T21:12:34.4643560-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("Domain") (0,1s)
+2020-10-16T21:12:34.4665070-04:00:Thread#0:B:Then the list of found books should contain only: 'Domain Driven Design'
+2020-10-16T21:12:34.5383551-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly("'Domain Driven De...") (0,1s)
+2020-10-16T21:12:34.5408594-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.5408846-04:00:Thread#:Scheduler: testitem #7 from normal test queue 
+2020-10-16T21:12:34.5408921-04:00:Thread#0:Scheduler: considering testitem #7 for thread 0
+2020-10-16T21:12:34.5409470-04:00:Thread#0:TestItem#7:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.5409549-04:00:Thread#0:TestItem#7:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.5409592-04:00:Thread#0:TestItem#7:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.5409660-04:00:Thread#0:Scheduler: using testitem #7 for thread 0
+2020-10-16T21:12:34.5409904-04:00:Thread#0:Scheduler: Test #7 is scheduled for thread
+2020-10-16T21:12:34.5410113-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.5446674-04:00:Thread#0: Test #6/0 is finished on thread #0 as Succeeded within 0,2089199 seconds
+2020-10-16T21:12:34.5447834-04:00:Thread#0: Test #7/0 is started on thread #0
+2020-10-16T21:12:34.6058931-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.6059081-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.6059101-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.6059109-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.6059120-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.6059160-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.6059195-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.6085580-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.6105328-04:00:Thread#0:B:When I search for books by the phrase 'Fowler'
+2020-10-16T21:12:34.6189668-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("Fowler") (0,0s)
+2020-10-16T21:12:34.6206204-04:00:Thread#0:B:Then the list of found books should contain only: 'Analysis Patterns'
+2020-10-16T21:12:34.6240365-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly("'Analysis Patterns'") (0,0s)
+2020-10-16T21:12:34.6258527-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.6259265-04:00:Thread#:Scheduler: testitem #8 from normal test queue 
+2020-10-16T21:12:34.6259336-04:00:Thread#0:Scheduler: considering testitem #8 for thread 0
+2020-10-16T21:12:34.6259845-04:00:Thread#0:TestItem#8:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.6259905-04:00:Thread#0:TestItem#8:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.6259936-04:00:Thread#0:TestItem#8:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.6259976-04:00:Thread#0:Scheduler: using testitem #8 for thread 0
+2020-10-16T21:12:34.6260224-04:00:Thread#0:Scheduler: Test #8 is scheduled for thread
+2020-10-16T21:12:34.6260422-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.6400846-04:00:Thread#0: Test #7/0 is finished on thread #0 as Succeeded within 0,0952598 seconds
+2020-10-16T21:12:34.6401612-04:00:Thread#0: Test #8/0 is started on thread #0
+2020-10-16T21:12:34.6525599-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.6525761-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.6525781-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.6525793-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.6525801-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.6525812-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.6525824-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.6549900-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.6563104-04:00:Thread#0:B:When I search for books by the phrase 'Windows Communication'
+2020-10-16T21:12:34.6706106-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("Windows Communica...") (0,0s)
+2020-10-16T21:12:34.6718438-04:00:Thread#0:B:Then the list of found books should contain only: 'Bridging the Communication Gap', 'Inside Windows SharePoint Services'
+2020-10-16T21:12:34.6732629-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly("'Bridging the Com...") (0,0s)
+2020-10-16T21:12:34.6744601-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.6744720-04:00:Thread#:Scheduler: testitem #9 from normal test queue 
+2020-10-16T21:12:34.6744751-04:00:Thread#0:Scheduler: considering testitem #9 for thread 0
+2020-10-16T21:12:34.6745047-04:00:Thread#0:TestItem#9:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.6745083-04:00:Thread#0:TestItem#9:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.6745114-04:00:Thread#0:TestItem#9:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.6745138-04:00:Thread#0:Scheduler: using testitem #9 for thread 0
+2020-10-16T21:12:34.6745284-04:00:Thread#0:Scheduler: Test #9 is scheduled for thread
+2020-10-16T21:12:34.6745391-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.6756969-04:00:Thread#0: Test #8/0 is finished on thread #0 as Succeeded within 0,0355077 seconds
+2020-10-16T21:12:34.6757423-04:00:Thread#0: Test #9/0 is started on thread #0
+2020-10-16T21:12:34.6850849-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.6850976-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.6850991-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.6851015-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.6851027-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.6851035-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.6851051-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.6873373-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.6885200-04:00:Thread#0:B:When I search for books by the phrase 'id'
+2020-10-16T21:12:34.6903941-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("id") (0,0s)
+2020-10-16T21:12:34.6915867-04:00:Thread#0:B:Then the list of found books should be:
+2020-10-16T21:12:34.6915934-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.6915950-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:34.6915962-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:34.6915970-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.7085179-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldBe(<table>) (0,0s)
+2020-10-16T21:12:34.7110095-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.7110272-04:00:Thread#:Scheduler: testitem #10 from normal test queue 
+2020-10-16T21:12:34.7110320-04:00:Thread#0:Scheduler: considering testitem #10 for thread 0
+2020-10-16T21:12:34.7110793-04:00:Thread#0:TestItem#10:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.7110853-04:00:Thread#0:TestItem#10:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.7110892-04:00:Thread#0:TestItem#10:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.7110939-04:00:Thread#0:Scheduler: using testitem #10 for thread 0
+2020-10-16T21:12:34.7111164-04:00:Thread#0:Scheduler: Test #10 is scheduled for thread
+2020-10-16T21:12:34.7111334-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.7124802-04:00:Thread#0: Test #9/0 is finished on thread #0 as Succeeded within 0,0367111 seconds
+2020-10-16T21:12:34.7125370-04:00:Thread#0: Test #10/0 is started on thread #0
+2020-10-16T21:12:34.7206179-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.7206301-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.7206321-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.7206329-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.7206340-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.7206352-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.7206360-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.7236408-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.7248352-04:00:Thread#0:B:When I search for books by the phrase 'Domain'
+2020-10-16T21:12:34.7265176-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("Domain") (0,0s)
+2020-10-16T21:12:34.7284329-04:00:Thread#0:B:Then the list of found books should contain only: 'Domain Driven Design'
+2020-10-16T21:12:34.7378790-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly("'Domain Driven De...") (0,0s)
+2020-10-16T21:12:34.7391508-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.7391619-04:00:Thread#:Scheduler: testitem #11 from normal test queue 
+2020-10-16T21:12:34.7391650-04:00:Thread#0:Scheduler: considering testitem #11 for thread 0
+2020-10-16T21:12:34.7391958-04:00:Thread#0:TestItem#11:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.7391998-04:00:Thread#0:TestItem#11:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.7392014-04:00:Thread#0:TestItem#11:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.7392037-04:00:Thread#0:Scheduler: using testitem #11 for thread 0
+2020-10-16T21:12:34.7392199-04:00:Thread#0:Scheduler: Test #11 is scheduled for thread
+2020-10-16T21:12:34.7392310-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.7403674-04:00:Thread#0: Test #10/0 is finished on thread #0 as Succeeded within 0,0278027 seconds
+2020-10-16T21:12:34.7404570-04:00:Thread#0: Test #11/0 is started on thread #0
+2020-10-16T21:12:34.7477309-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.7477443-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.7477463-04:00:Thread#0:B:  | Author        | Title                              |
+2020-10-16T21:12:34.7477471-04:00:Thread#0:B:  | Martin Fowler | Analysis Patterns                  |
+2020-10-16T21:12:34.7477482-04:00:Thread#0:B:  | Eric Evans    | Domain Driven Design               |
+2020-10-16T21:12:34.7477506-04:00:Thread#0:B:  | Ted Pattison  | Inside Windows SharePoint Services |
+2020-10-16T21:12:34.7477522-04:00:Thread#0:B:  | Gojko Adzic   | Bridging the Communication Gap     |
+2020-10-16T21:12:34.7514955-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.7529106-04:00:Thread#0:B:When I search for books by the phrase 'Windows Communication'
+2020-10-16T21:12:34.7547822-04:00:Thread#0:T:done: SearchSteps.WhenISearchForBooksByThePhrase("Windows Communica...") (0,0s)
+2020-10-16T21:12:34.7560697-04:00:Thread#0:B:Then the list of found books should contain only: 'Bridging the Communication Gap', 'Inside Windows SharePoint Services'
+2020-10-16T21:12:34.7578090-04:00:Thread#0:T:done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly("'Bridging the Com...") (0,0s)
+2020-10-16T21:12:34.7596572-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.7596793-04:00:Thread#:Scheduler: testitem #13 from normal test queue 
+2020-10-16T21:12:34.7596840-04:00:Thread#0:Scheduler: considering testitem #13 for thread 0
+2020-10-16T21:12:34.7597373-04:00:Thread#0:TestItem#13:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.7597440-04:00:Thread#0:TestItem#13:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.7597476-04:00:Thread#0:TestItem#13:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.7597519-04:00:Thread#0:Scheduler: using testitem #13 for thread 0
+2020-10-16T21:12:34.7597748-04:00:Thread#0:Scheduler: Test #13 is scheduled for thread
+2020-10-16T21:12:34.7597938-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.7623955-04:00:Thread#0: Test #11/0 is finished on thread #0 as Succeeded within 0,0218847 seconds
+2020-10-16T21:12:34.7624705-04:00:Thread#0: Test #13/0 is started on thread #0
+2020-10-16T21:12:34.7751108-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.7751266-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.7751281-04:00:Thread#0:B:  | Title                | Price |
+2020-10-16T21:12:34.7751293-04:00:Thread#0:B:  | 100 a�os de soledad  | 50.20 |
+2020-10-16T21:12:34.7751305-04:00:Thread#0:B:  | Programacion en Java | 46.34 |
+2020-10-16T21:12:34.7751313-04:00:Thread#0:B:  | La metamorfosis      | 31.49 |
+2020-10-16T21:12:34.7751325-04:00:Thread#0:B:  | La tolla del mojado  | 24.75 |
+2020-10-16T21:12:34.7778669-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.7791541-04:00:Thread#0:B:When I enter the shop
+2020-10-16T21:12:34.8043788-04:00:Thread#0:T:done: HomeSteps.WhenIEnterTheShop() (0,0s)
+2020-10-16T21:12:34.8056348-04:00:Thread#0:B:Then the home screen should show the book 'La tolla del mojado'
+2020-10-16T21:12:34.8097457-04:00:Thread#0:T:done: HomeSteps.ThenTheHomeScreenShouldShowTheBook("La tolla del mojado") (0,0s)
+2020-10-16T21:12:34.8120655-04:00:Thread#0:B:And the home screen should show the book 'La metamorfosis'
+2020-10-16T21:12:34.8133867-04:00:Thread#0:T:done: HomeSteps.ThenTheHomeScreenShouldShowTheBook("La metamorfosis") (0,0s)
+2020-10-16T21:12:34.8146005-04:00:Thread#0:B:And the home screen should show the book 'Programacion en Java'
+2020-10-16T21:12:34.8159687-04:00:Thread#0:T:done: HomeSteps.ThenTheHomeScreenShouldShowTheBook("Programacion en Java") (0,0s)
+2020-10-16T21:12:34.8174850-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.8175012-04:00:Thread#:Scheduler: testitem #14 from normal test queue 
+2020-10-16T21:12:34.8175063-04:00:Thread#0:Scheduler: considering testitem #14 for thread 0
+2020-10-16T21:12:34.8175517-04:00:Thread#0:TestItem#14:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.8175580-04:00:Thread#0:TestItem#14:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.8175619-04:00:Thread#0:TestItem#14:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.8175675-04:00:Thread#0:Scheduler: using testitem #14 for thread 0
+2020-10-16T21:12:34.8175908-04:00:Thread#0:Scheduler: Test #14 is scheduled for thread
+2020-10-16T21:12:34.8176093-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.8209444-04:00:Thread#0: Test #13/0 is finished on thread #0 as Succeeded within 0,0584352 seconds
+2020-10-16T21:12:34.8210217-04:00:Thread#0: Test #14/0 is started on thread #0
+2020-10-16T21:12:34.8382308-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.8382478-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.8382494-04:00:Thread#0:B:  | Title                | Price |
+2020-10-16T21:12:34.8382502-04:00:Thread#0:B:  | 100 a�os de soledad  | 50.20 |
+2020-10-16T21:12:34.8382514-04:00:Thread#0:B:  | Programacion en Java | 46.34 |
+2020-10-16T21:12:34.8382526-04:00:Thread#0:B:  | La metamorfosis      | 31.49 |
+2020-10-16T21:12:34.8382533-04:00:Thread#0:B:  | La tolla del mojado  | 24.75 |
+2020-10-16T21:12:34.8406624-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.8427234-04:00:Thread#0:B:When I enter the shop
+2020-10-16T21:12:34.8454021-04:00:Thread#0:T:done: HomeSteps.WhenIEnterTheShop() (0,0s)
+2020-10-16T21:12:34.8474196-04:00:Thread#0:B:Then the home screen should show the books 'La tolla del mojado', 'La metamorfosis', 'Programacion en Java'
+2020-10-16T21:12:34.9782935-04:00:Thread#0:T:done: HomeSteps.ThenTheHomeScreenShouldShowTheBooks("'La tolla del moj...") (0,1s)
+2020-10-16T21:12:34.9797762-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:34.9797947-04:00:Thread#:Scheduler: testitem #15 from normal test queue 
+2020-10-16T21:12:34.9798002-04:00:Thread#0:Scheduler: considering testitem #15 for thread 0
+2020-10-16T21:12:34.9798464-04:00:Thread#0:TestItem#15:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:34.9798527-04:00:Thread#0:TestItem#15:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:34.9798575-04:00:Thread#0:TestItem#15:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:34.9798626-04:00:Thread#0:Scheduler: using testitem #15 for thread 0
+2020-10-16T21:12:34.9798879-04:00:Thread#0:Scheduler: Test #15 is scheduled for thread
+2020-10-16T21:12:34.9799096-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:34.9811827-04:00:Thread#0: Test #14/0 is finished on thread #0 as Succeeded within 0,1601262 seconds
+2020-10-16T21:12:34.9812802-04:00:Thread#0: Test #15/0 is started on thread #0
+2020-10-16T21:12:34.9898448-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:34.9898586-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.9898605-04:00:Thread#0:B:  | Title                | Price |
+2020-10-16T21:12:34.9898617-04:00:Thread#0:B:  | 100 a�os de soledad  | 50.20 |
+2020-10-16T21:12:34.9898625-04:00:Thread#0:B:  | Programacion en Java | 46.34 |
+2020-10-16T21:12:34.9898649-04:00:Thread#0:B:  | La metamorfosis      | 31.49 |
+2020-10-16T21:12:34.9898661-04:00:Thread#0:B:  | La tolla del mojado  | 24.75 |
+2020-10-16T21:12:34.9934038-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:34.9947905-04:00:Thread#0:B:When I enter the shop
+2020-10-16T21:12:34.9964385-04:00:Thread#0:T:done: HomeSteps.WhenIEnterTheShop() (0,0s)
+2020-10-16T21:12:34.9976235-04:00:Thread#0:B:Then the home screen should show the following books
+2020-10-16T21:12:34.9976314-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:34.9976341-04:00:Thread#0:B:  | Title                |
+2020-10-16T21:12:34.9976353-04:00:Thread#0:B:  | La tolla del mojado  |
+2020-10-16T21:12:34.9976365-04:00:Thread#0:B:  | La metamorfosis      |
+2020-10-16T21:12:34.9976373-04:00:Thread#0:B:  | Programacion en Java |
+2020-10-16T21:12:35.0004080-04:00:Thread#0:T:done: HomeSteps.ThenTheHomeScreenShouldShowTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.0016629-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.0016755-04:00:Thread#:Scheduler: testitem #17 from normal test queue 
+2020-10-16T21:12:35.0016791-04:00:Thread#0:Scheduler: considering testitem #17 for thread 0
+2020-10-16T21:12:35.0017110-04:00:Thread#0:TestItem#17:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.0017146-04:00:Thread#0:TestItem#17:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.0017166-04:00:Thread#0:TestItem#17:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.0017189-04:00:Thread#0:Scheduler: using testitem #17 for thread 0
+2020-10-16T21:12:35.0017351-04:00:Thread#0:Scheduler: Test #17 is scheduled for thread
+2020-10-16T21:12:35.0017474-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.0030844-04:00:Thread#0: Test #15/0 is finished on thread #0 as Succeeded within 0,0217722 seconds
+2020-10-16T21:12:35.0031716-04:00:Thread#0: Test #17/0 is started on thread #0
+2020-10-16T21:12:35.0200629-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.0200823-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.0200858-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:35.0200886-04:00:Thread#0:B:  | Analysis Patterns                  |
+2020-10-16T21:12:35.0200913-04:00:Thread#0:B:  | Domain Driven Design               |
+2020-10-16T21:12:35.0200941-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:35.0200969-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:35.0240605-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.0260436-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns'
+2020-10-16T21:12:35.2382011-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns") (0,2s)
+2020-10-16T21:12:35.2394765-04:00:Thread#0:B:When I place 'Domain Driven Design' into the shopping cart
+2020-10-16T21:12:35.2537546-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart("Domain Driven Design") (0,0s)
+2020-10-16T21:12:35.2647596-04:00:Thread#0:B:Then my shopping cart should contain 2 types of items
+2020-10-16T21:12:35.2699465-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(2) (0,0s)
+2020-10-16T21:12:35.2711181-04:00:Thread#0:B:And my shopping cart should contain 1 copy of 'Analysis Patterns'
+2020-10-16T21:12:35.2778582-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(1, "Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.2800084-04:00:Thread#0:B:And my shopping cart should contain 1 copy of 'Domain Driven Design'
+2020-10-16T21:12:35.2833167-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(1, "Domain Driven Design") (0,0s)
+2020-10-16T21:12:35.2857214-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.2857455-04:00:Thread#:Scheduler: testitem #18 from normal test queue 
+2020-10-16T21:12:35.2857503-04:00:Thread#0:Scheduler: considering testitem #18 for thread 0
+2020-10-16T21:12:35.2858063-04:00:Thread#0:TestItem#18:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.2858122-04:00:Thread#0:TestItem#18:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.2858166-04:00:Thread#0:TestItem#18:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.2858209-04:00:Thread#0:Scheduler: using testitem #18 for thread 0
+2020-10-16T21:12:35.2858485-04:00:Thread#0:Scheduler: Test #18 is scheduled for thread
+2020-10-16T21:12:35.2858714-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.2905384-04:00:Thread#0: Test #17/0 is finished on thread #0 as Succeeded within 0,2873254 seconds
+2020-10-16T21:12:35.2906604-04:00:Thread#0: Test #18/0 is started on thread #0
+2020-10-16T21:12:35.3000106-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.3000240-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.3000256-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:35.3000268-04:00:Thread#0:B:  | Analysis Patterns                  |
+2020-10-16T21:12:35.3000280-04:00:Thread#0:B:  | Domain Driven Design               |
+2020-10-16T21:12:35.3000288-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:35.3000299-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:35.3021619-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.3033548-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns'
+2020-10-16T21:12:35.3071850-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.3083735-04:00:Thread#0:B:When I place 'Analysis Patterns' into the shopping cart
+2020-10-16T21:12:35.3098423-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.3111095-04:00:Thread#0:B:Then my shopping cart should contain 1 type of item
+2020-10-16T21:12:35.3127677-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(1) (0,0s)
+2020-10-16T21:12:35.3139382-04:00:Thread#0:B:And my shopping cart should contain 2 copies of 'Analysis Patterns'
+2020-10-16T21:12:35.3159971-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(2, "Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.3173578-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.3173708-04:00:Thread#:Scheduler: testitem #20 from normal test queue 
+2020-10-16T21:12:35.3173740-04:00:Thread#0:Scheduler: considering testitem #20 for thread 0
+2020-10-16T21:12:35.3174064-04:00:Thread#0:TestItem#20:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.3174103-04:00:Thread#0:TestItem#20:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.3174123-04:00:Thread#0:TestItem#20:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.3174147-04:00:Thread#0:Scheduler: using testitem #20 for thread 0
+2020-10-16T21:12:35.3174316-04:00:Thread#0:Scheduler: Test #20 is scheduled for thread
+2020-10-16T21:12:35.3174474-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.3197772-04:00:Thread#0: Test #18/0 is finished on thread #0 as Succeeded within 0,0290832 seconds
+2020-10-16T21:12:35.3198632-04:00:Thread#0: Test #20/0 is started on thread #0
+2020-10-16T21:12:35.3312301-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.3312471-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.3312506-04:00:Thread#0:B:  | Title                              | Price |
+2020-10-16T21:12:35.3312542-04:00:Thread#0:B:  | Analysis Patterns                  | 50.20 |
+2020-10-16T21:12:35.3312562-04:00:Thread#0:B:  | Domain Driven Design               | 46.34 |
+2020-10-16T21:12:35.3312585-04:00:Thread#0:B:  | Inside Windows SharePoint Services | 31.49 |
+2020-10-16T21:12:35.3312605-04:00:Thread#0:B:  | Bridging the Communication Gap     | 24.75 |
+2020-10-16T21:12:35.3356556-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.3389879-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns', 'Domain Driven Design'
+2020-10-16T21:12:35.3420634-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns...") (0,0s)
+2020-10-16T21:12:35.3531314-04:00:Thread#0:B:When I place 'Analysis Patterns' into the shopping cart
+2020-10-16T21:12:35.3546667-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.3557778-04:00:Thread#0:B:Then my shopping cart should contain 2 types of items
+2020-10-16T21:12:35.3571444-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(2) (0,0s)
+2020-10-16T21:12:35.3582367-04:00:Thread#0:B:And my shopping cart should contain 3 items in total
+2020-10-16T21:12:35.3606557-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainItemsInTotal(3) (0,0s)
+2020-10-16T21:12:35.3624623-04:00:Thread#0:B:And my shopping cart should show a total price of 146.74
+2020-10-16T21:12:35.3707069-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldShowATotalPriceOf(146,74) (0,0s)
+2020-10-16T21:12:35.3730666-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.3730891-04:00:Thread#:Scheduler: testitem #21 from normal test queue 
+2020-10-16T21:12:35.3730946-04:00:Thread#0:Scheduler: considering testitem #21 for thread 0
+2020-10-16T21:12:35.3731451-04:00:Thread#0:TestItem#21:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.3731526-04:00:Thread#0:TestItem#21:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.3731562-04:00:Thread#0:TestItem#21:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.3731605-04:00:Thread#0:Scheduler: using testitem #21 for thread 0
+2020-10-16T21:12:35.3731858-04:00:Thread#0:Scheduler: Test #21 is scheduled for thread
+2020-10-16T21:12:35.3732047-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.3753941-04:00:Thread#0: Test #20/0 is finished on thread #0 as Succeeded within 0,055483 seconds
+2020-10-16T21:12:35.3755949-04:00:Thread#0: Test #21/0 is started on thread #0
+2020-10-16T21:12:35.3859438-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.3859616-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.3859647-04:00:Thread#0:B:  | Title                              | Price |
+2020-10-16T21:12:35.3859671-04:00:Thread#0:B:  | Analysis Patterns                  | 50.20 |
+2020-10-16T21:12:35.3859691-04:00:Thread#0:B:  | Domain Driven Design               | 46.34 |
+2020-10-16T21:12:35.3859730-04:00:Thread#0:B:  | Inside Windows SharePoint Services | 31.49 |
+2020-10-16T21:12:35.3859750-04:00:Thread#0:B:  | Bridging the Communication Gap     | 24.75 |
+2020-10-16T21:12:35.3903863-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.3927092-04:00:Thread#0:B:When I enter the shop
+2020-10-16T21:12:35.3958975-04:00:Thread#0:T:done: HomeSteps.WhenIEnterTheShop() (0,0s)
+2020-10-16T21:12:35.3979345-04:00:Thread#0:B:Then my shopping cart should be empty
+2020-10-16T21:12:35.4014287-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldBeEmpty() (0,0s)
+2020-10-16T21:12:35.4035148-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.4035369-04:00:Thread#:Scheduler: testitem #23 from normal test queue 
+2020-10-16T21:12:35.4035429-04:00:Thread#0:Scheduler: considering testitem #23 for thread 0
+2020-10-16T21:12:35.4036044-04:00:Thread#0:TestItem#23:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.4036108-04:00:Thread#0:TestItem#23:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.4036147-04:00:Thread#0:TestItem#23:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.4036187-04:00:Thread#0:Scheduler: using testitem #23 for thread 0
+2020-10-16T21:12:35.4036431-04:00:Thread#0:Scheduler: Test #23 is scheduled for thread
+2020-10-16T21:12:35.4036644-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.4058869-04:00:Thread#0: Test #21/0 is finished on thread #0 as Succeeded within 0,0302458 seconds
+2020-10-16T21:12:35.4060306-04:00:Thread#0: Test #23/0 is started on thread #0
+2020-10-16T21:12:35.4231705-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.4231895-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.4231930-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:35.4231958-04:00:Thread#0:B:  | Analysis Patterns                  |
+2020-10-16T21:12:35.4231986-04:00:Thread#0:B:  | Domain Driven Design               |
+2020-10-16T21:12:35.4232009-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:35.4232029-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:35.4270220-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.4291655-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns'
+2020-10-16T21:12:35.4322471-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.4355164-04:00:Thread#0:B:When I change the quantity of 'Analysis Patterns' to 3
+2020-10-16T21:12:35.4398680-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIChangeTheQuantityOfTo("Analysis Patterns", 3) (0,0s)
+2020-10-16T21:12:35.4502200-04:00:Thread#0:B:Then my shopping cart should contain 1 type of item
+2020-10-16T21:12:35.4518499-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(1) (0,0s)
+2020-10-16T21:12:35.4533049-04:00:Thread#0:B:And my shopping cart should contain 3 copies of 'Analysis Patterns'
+2020-10-16T21:12:35.4556118-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(3, "Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.4571564-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.4571734-04:00:Thread#:Scheduler: testitem #24 from normal test queue 
+2020-10-16T21:12:35.4571793-04:00:Thread#0:Scheduler: considering testitem #24 for thread 0
+2020-10-16T21:12:35.4572291-04:00:Thread#0:TestItem#24:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.4572354-04:00:Thread#0:TestItem#24:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.4572393-04:00:Thread#0:TestItem#24:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.4572441-04:00:Thread#0:Scheduler: using testitem #24 for thread 0
+2020-10-16T21:12:35.4572693-04:00:Thread#0:Scheduler: Test #24 is scheduled for thread
+2020-10-16T21:12:35.4572895-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.4587401-04:00:Thread#0: Test #23/0 is finished on thread #0 as Succeeded within 0,0526728 seconds
+2020-10-16T21:12:35.4588088-04:00:Thread#0: Test #24/0 is started on thread #0
+2020-10-16T21:12:35.4694534-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.4694699-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.4694739-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:35.4694763-04:00:Thread#0:B:  | Analysis Patterns                  |
+2020-10-16T21:12:35.4694790-04:00:Thread#0:B:  | Domain Driven Design               |
+2020-10-16T21:12:35.4694810-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:35.4694830-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:35.4717515-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.4733162-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns'
+2020-10-16T21:12:35.4752671-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.4764990-04:00:Thread#0:B:When I change the quantity of 'Analysis Patterns' to 0
+2020-10-16T21:12:35.4800482-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIChangeTheQuantityOfTo("Analysis Patterns", 0) (0,0s)
+2020-10-16T21:12:35.4813879-04:00:Thread#0:B:Then my shopping cart should be empty
+2020-10-16T21:12:35.4828954-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldBeEmpty() (0,0s)
+2020-10-16T21:12:35.4842983-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.4843145-04:00:Thread#:Scheduler: testitem #26 from normal test queue 
+2020-10-16T21:12:35.4843196-04:00:Thread#0:Scheduler: considering testitem #26 for thread 0
+2020-10-16T21:12:35.4843642-04:00:Thread#0:TestItem#26:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.4843705-04:00:Thread#0:TestItem#26:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.4843745-04:00:Thread#0:TestItem#26:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.4843792-04:00:Thread#0:Scheduler: using testitem #26 for thread 0
+2020-10-16T21:12:35.4844049-04:00:Thread#0:Scheduler: Test #26 is scheduled for thread
+2020-10-16T21:12:35.4844246-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.4859021-04:00:Thread#0: Test #24/0 is finished on thread #0 as Succeeded within 0,0270566 seconds
+2020-10-16T21:12:35.4859905-04:00:Thread#0: Test #26/0 is started on thread #0
+2020-10-16T21:12:35.5032770-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.5032936-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.5032964-04:00:Thread#0:B:  | Title                              |
+2020-10-16T21:12:35.5032983-04:00:Thread#0:B:  | Analysis Patterns                  |
+2020-10-16T21:12:35.5033003-04:00:Thread#0:B:  | Domain Driven Design               |
+2020-10-16T21:12:35.5033039-04:00:Thread#0:B:  | Inside Windows SharePoint Services |
+2020-10-16T21:12:35.5033058-04:00:Thread#0:B:  | Bridging the Communication Gap     |
+2020-10-16T21:12:35.5065032-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.5086194-04:00:Thread#0:B:Given I have a shopping cart with: 'Analysis Patterns'
+2020-10-16T21:12:35.5116258-04:00:Thread#0:T:done: ShoppingCartSteps.GivenIHaveAShoppingCartWith("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.5130701-04:00:Thread#0:B:When I delete 'Analysis Patterns' from the shopping cart
+2020-10-16T21:12:35.5165773-04:00:Thread#0:T:done: ShoppingCartSteps.WhenIDeleteFromTheShoppingCart("Analysis Patterns") (0,0s)
+2020-10-16T21:12:35.5187547-04:00:Thread#0:B:Then my shopping cart should be empty
+2020-10-16T21:12:35.5201782-04:00:Thread#0:T:done: ShoppingCartSteps.ThenMyShoppingCartShouldBeEmpty() (0,0s)
+2020-10-16T21:12:35.5301485-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.5301690-04:00:Thread#:Scheduler: testitem #28 from normal test queue 
+2020-10-16T21:12:35.5301737-04:00:Thread#0:Scheduler: considering testitem #28 for thread 0
+2020-10-16T21:12:35.5302187-04:00:Thread#0:TestItem#28:testItemMatchesCurrentTestThread:UnSpecific
+2020-10-16T21:12:35.5302246-04:00:Thread#0:TestItem#28:runsOnOneOtherThreadSpecific:False
+2020-10-16T21:12:35.5302290-04:00:Thread#0:TestItem#28:runsOnOneOtherThreadUnspecific:False
+2020-10-16T21:12:35.5302337-04:00:Thread#0:Scheduler: using testitem #28 for thread 0
+2020-10-16T21:12:35.5302586-04:00:Thread#0:Scheduler: Test #28 is scheduled for thread
+2020-10-16T21:12:35.5302803-04:00:Thread#0:Scheduler: with testItemExecutionIndex 0
+2020-10-16T21:12:35.5317898-04:00:Thread#0: Test #26/0 is finished on thread #0 as Succeeded within 0,0457606 seconds
+2020-10-16T21:12:35.5318664-04:00:Thread#0: Test #28/0 is started on thread #0
+2020-10-16T21:12:35.5426247-04:00:Thread#0:B:Given the following books
+2020-10-16T21:12:35.5426385-04:00:Thread#0:B:  --- table step argument ---
+2020-10-16T21:12:35.5426401-04:00:Thread#0:B:  | Author                         | Title                          | Price |
+2020-10-16T21:12:35.5426412-04:00:Thread#0:B:  | Gojko Adzic                    | Bridging the Communication Gap | 12.20 |
+2020-10-16T21:12:35.5426420-04:00:Thread#0:B:  | Gojko Adzic                    | Specification By Example       | 15.30 |
+2020-10-16T21:12:35.5426432-04:00:Thread#0:B:  | Lisa Crispin and Janet Gregory | Agile Testing                  | 20.20 |
+2020-10-16T21:12:35.5426452-04:00:Thread#0:B:  | Mitch Lacey                    | The Scrum Field Guide          | 15.31 |
+2020-10-16T21:12:35.5426476-04:00:Thread#0:B:  | Martin Fowler                  | Refactoring                    | 29.55 |
+2020-10-16T21:12:35.5426483-04:00:Thread#0:B:  | Esther Derby and Diana Larsen  | Agile Retrospectives           | 16.99 |
+2020-10-16T21:12:35.5426495-04:00:Thread#0:B:  | Matt Wynne and Aslak Hellesoy  | The Cucumber Book              | 18.00 |
+2020-10-16T21:12:35.5426515-04:00:Thread#0:B:  | David Chelimsky                | The RSpec Book                 | 17.50 |
+2020-10-16T21:12:35.5479643-04:00:Thread#0:T:done: BookSteps.GivenTheFollowingBooks(<table>) (0,0s)
+2020-10-16T21:12:35.5494762-04:00:Thread#0:Scheduler: get next test for thread 0
+2020-10-16T21:12:35.5494884-04:00:Thread#:Scheduler: at the end of normal test queue
+2020-10-16T21:12:35.5494927-04:00:Thread#0:Scheduler: enumerator for thread is at end
+2020-10-16T21:12:35.5494955-04:00:Thread#0:Scheduler: No more tests for thread
+2020-10-16T21:12:35.5510496-04:00:Thread#0: Test #28/0 is finished on thread #0 as Succeeded within 0,0191516 seconds
+2020-10-16T21:12:36.5235839-04:00:Thread#-1:Scheduler: get next test for thread -1
+2020-10-16T21:12:36.5236747-04:00:Thread#:Scheduler: at the end of normal test queue
+2020-10-16T21:12:36.5236862-04:00:Thread#-1:Scheduler: enumerator for thread is at end
+2020-10-16T21:12:36.5277978-04:00;Thread#12;Info;test run finished
+2020-10-16T21:12:36.5282585-04:00;Thread#12;Info;publishing test results
+2020-10-16T21:12:36.5285731-04:00;Thread#12;Info;Not publishing results.
+2020-10-16T21:12:36.5287768-04:00;Thread#12;Info;test results published
+2020-10-16T21:12:36.5289572-04:00;Thread#12;Info;generating reports
+2020-10-16T21:12:36.7266179-04:00;Thread#12;Info;Starting external report generation process
+2020-10-16T21:12:39.1974301-04:00;Thread#12;Info;Successfully generated reports.
+2020-10-16T21:12:39.2015586-04:00;Thread#12;Info;Successfully generated reports
+2020-10-16T21:12:39.2080884-04:00:Total: 18
+2020-10-16T21:12:39.2107131-04:00:Succeeded: 18
+2020-10-16T21:12:39.2111595-04:00:Ignored: 0
+2020-10-16T21:12:39.2115456-04:00:Pending: 0
+2020-10-16T21:12:39.2115586-04:00:Skipped: 0
+2020-10-16T21:12:39.2119552-04:00:Failed: 0
+2020-10-16T21:12:39.2235704-04:00;VSTestExecutionThread;Info;Adding attachments to VSTest
+2020-10-16T21:12:39.2240741-04:00;VSTestExecutionThread;Info;adding Test Execution Report 'E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\TestResults\ReportTemplate.html'
+========== End of log file ==========

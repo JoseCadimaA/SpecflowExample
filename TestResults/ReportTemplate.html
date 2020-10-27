@@ -1,0 +1,3225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>BookShop.AcceptanceTests Test Execution Report</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript">
+            /**
+            * jQuery.fn.sortElements
+            * --------------
+            * #author James Padolsey (http://james.padolsey.com)
+            * #version 0.11
+            * #updated 18-MAR-2010
+            * #url https://raw.github.com/jamespadolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js
+            * --------------
+            * #param Function comparator:
+            *   Exactly the same behaviour as [1,2,3].sort(comparator)
+            *   
+            * #param Function getSortable
+            *   A function that should return the element that is
+            *   to be sorted. The comparator will run on the
+            *   current collection, but you may want the actual
+            *   resulting sort to occur on a parent or another
+            *   associated element.
+            *   
+            *   E.g. $('td').sortElements(comparator, function(){
+            *      return this.parentNode; 
+            *   })
+            *   
+            *   The <td>'s parent (<tr>) will be sorted instead
+            *   of the <td> itself.
+            */
+            jQuery.fn.sortElements = (function () {
+
+                var sort = [].sort;
+
+                return function (comparator, getSortable) {
+
+                    getSortable = getSortable || function () { return this; };
+
+                    var placements = this.map(function () {
+
+                        var sortElement = getSortable.call(this),
+                parentNode = sortElement.parentNode,
+
+                        // Since the element itself will change position, we have
+                        // to have some way of storing it's original position in
+                        // the DOM. The easiest way is to have a 'flag' node:
+                nextSibling = parentNode.insertBefore(
+                    document.createTextNode(''),
+                    sortElement.nextSibling
+                );
+
+                        return function () {
+
+                            if (parentNode === this) {
+                                throw new Error(
+                        "You can't sort elements if any one is a descendant of another."
+                    );
+                            }
+
+                            // Insert before flag:
+                            parentNode.insertBefore(this, nextSibling);
+                            // Remove flag:
+                            parentNode.removeChild(nextSibling);
+
+                        };
+
+                    });
+
+                    return sort.call(this, comparator).each(function (i) {
+                        placements[i].call(getSortable.call(this));
+                    });
+
+                };
+
+            })();
+        </script>
+        <script type="text/javascript">
+            jQuery.fn.setBarSizes = (function () {
+                return function (metricName, maxBarSize, min) {
+                    var max = Math.max.apply(Math, $.makeArray($(this).map(function () { return Number($(this).attr('data-sr-' + metricName)); })));
+                    var scale = 1.0;
+                    while (max > 0.0 && max <= 10.0) {
+                        scale = scale * 10.0;
+                        max = max * 10.0;
+                    }
+                    max = (Math.ceil(max / 2) * 2) / scale;
+
+                    this.each(function () {
+                        var barAnchor = $(this).find('a');
+                        var actual = $(this).attr('data-sr-' + metricName);
+                        var newHeight = Math.max(Math.round(maxBarSize * (actual - min) / (max - min)), 2);
+                        barAnchor.css({ height: newHeight });
+                    });
+
+                    var unit = "";
+                    if (metricName.substr(metricName.length - 4, 4) === "time")
+                        unit = "s";
+
+                    $('#testview .scale-min-label').each(function () {
+                        $(this).text(min.toString() + unit);
+                    });
+                    $('#testview .scale-max-label').each(function () {
+                        $(this).text(max.toString() + unit);
+                    });
+                    var mid = max / 2;
+                    $('#testview .scale-mid-label').each(function () {
+                        $(this).text(mid.toString() + unit);
+                    });
+                };
+            })();
+
+            function getComparer(metricName, isDesc) {
+                return function (a, b) {
+                    var aNumber = Number($(a).attr('data-sr-' + metricName));
+                    var bNumber = Number($(b).attr('data-sr-' + metricName));
+                    var result = aNumber > bNumber ? 1 : (aNumber < bNumber ? -1 : 0);
+                    if (isDesc)
+                        result = -1 * result;
+
+                    if (result == 0 && metricName != "order")
+                        result = getComparer("order", false)(a, b);
+
+                    return result;
+                };
+            }
+
+            var currentSort = "";
+            function doSort(allowToggleDesc) {
+                var newSort = $("input[name='barSortOrder']:checked").val();
+                if (allowToggleDesc && currentSort == newSort) {
+                    $('#barSortDesc').click();
+                    doSort(false);
+                    return;
+                }
+                currentSort = newSort;
+                $('#testview td.testview-item').sortElements(getComparer(newSort, $('#barSortDesc').is(':checked')));
+            }
+
+
+            function doSetHeights(allowSort) {
+                var selectedMetric = $("input[name='barHeight']:checked").val();
+                $('#testview td.testview-item').setBarSizes(selectedMetric, 60, 0.0);
+
+                if (allowSort && currentSort != selectedMetric) {
+                    var $radios = $("input[name='barSortOrder']");
+                    $radios.filter('[value=' + selectedMetric + ']').attr('checked', true);
+                    $("#barSortDesc").attr("checked", [true]);
+                    doSort(false);
+                }
+            }
+
+            $(document).ready(function () {
+                $("input[name='barSortOrder']").click(function () { doSort(true); return true; });
+                $("input[name='barSortDesc']").change(function () { doSort(false); });
+                $("input[name='barHeight']").change(function () { doSetHeights(true); });
+
+                doSort(false);
+                doSetHeights(false);
+
+                $("div.scrollable").css({ 'overflow': 'auto' });
+            });
+        </script>
+
+        <style type="text/css">
+            body 
+            {
+                color: #000000;
+                font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+                line-height: 130%;
+            }
+            h1 {
+                font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+                font-size: 170%;
+                font-weight: bold;
+            }            
+            h2 {
+                font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+                font-size: 130%;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }            
+            h3 {
+                font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+                font-size: 120%;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }            
+            a.bar
+            {
+                text-decoration: none;
+                display: block;
+                line-height: 1px;
+            }
+            .description
+            {
+                font-style: italic;
+            }
+            .log 
+            {
+                width: 600px;
+                white-space: pre-wrap;
+                display: block;
+                margin: 0px;
+            }
+            .errorMessage 
+            {
+                width: 600px;
+                color: Red;
+                font-weight: bold;
+            }
+            .stackTrace 
+            {
+                width: 600px;
+                white-space: pre-wrap;
+                font-style: italic;
+                color: Red;
+                display: block;
+            }
+            table.testEvents
+            {
+                border: solid 1px #e8eef4;
+                border-collapse: collapse;
+            }
+            table.testEvents td
+            {
+                vertical-align: top;
+                padding: 5px;
+                border: solid 1px #e8eef4;
+            }
+            table.testEvents th
+            {
+                padding: 6px 5px;
+                text-align: left;
+                background-color: #e8eef4;
+                border: solid 1px #e8eef4;                
+            }
+            .comment
+            {
+                font-style: italic;
+                font-size: smaller;
+            }
+            .startupBar
+            {
+                background-color: #EEEEEE;
+                cursor: default;
+            }
+            
+            .colorSucceeded
+            {
+                background-color: #90ED7B;
+            }
+            .colorIgnored
+            {
+                background-color: #FFFF85;
+            }
+            .colorPending
+            {
+                background-color: #D47BED;
+            }
+            .colorNothingToRun
+            {
+                background-color: #CCCCFF;
+            }
+            .colorSkipped
+            {
+                background-color: #CCCCFF;
+            }
+            .colorInconclusive
+            {
+                background-color: #7BEDED;
+            }
+            .colorCleanupFailed
+            {
+                background-color: #FFCCCC;
+            }
+            .colorRandomlyFailed
+            {
+                background-color: #EDB07B;
+            }
+            .colorFailed
+            {
+                background-color: #ED5F5F;
+            }
+            .colorInitializationFailed
+            {
+                background-color: #FF0000;
+            }
+            .colorFrameworkError
+            {
+                background-color: #FF0000;
+            }
+            ul.subNodeLinks
+            {
+                padding-left: 20px;
+                margin: 0px;
+            }
+            ul.subNodeLinks li
+            {
+                list-style: none;
+            }
+            
+            /* views general */
+            div.scrollable
+            {
+                /*overflow: auto; - thsi has to be set from js, because of an IE9 bug */
+            }
+            div.viewbox
+            {
+                position: relative;
+                border: 3px solid #e8eef4;
+            }
+            div.viewbox table
+            {
+                border: 0px;
+            }
+                        
+            /* testview */
+            #testview
+            {
+                padding-top: 23px;
+            }
+            
+            table.testview-items td
+            {
+                vertical-align: bottom;
+                padding: 0px 1px 0px 1px;
+            }
+            td.right-padding, td.left-padding
+            {
+                width: 25px;
+                min-width: 25px;
+            }
+            table.testview-items a.bar
+            {
+                width: 5px;
+            }
+            table.testview-items tr.testview-items-row
+            {
+                height: 60px;
+            }
+            
+            /* scale */
+            table.vertical-scale 
+            {
+                position: absolute;
+                top: 23px;
+                left: 0px;
+                width: 100%;
+                z-index: -100;
+            }
+            table.vertical-scale td, tr.horizontal-scale td
+            {
+                font-size: 60%;
+                line-height: normal;
+            }
+            table.vertical-scale tr.scale-max, table.vertical-scale tr.scale-mid 
+            {
+                height: 30px;
+            }
+            tr.horizontal-scale, table.vertical-scale tr.scale-min 
+            {
+                height: 12px;
+            }
+            
+            td.scale-max-label, td.scale-mid-label, td.scale-min-label
+            {
+                border-top: solid 1px #E6E6E6;
+                text-align: left;
+                vertical-align: top;
+            }
+            td.scale-10-label
+            {
+                border-left: solid 1px #E6E6E6;
+                text-align: left;
+                vertical-align: bottom;
+                padding-left: 1px;
+            }
+            tr.scale-mid td, tr.scale-min td, tr.scale-max td
+            {
+                border-top: solid 1px #E6E6E6;
+            }
+           
+            
+            /* bar-control */
+            #bar-control
+            {
+                font-size: 60%;
+                line-height: normal;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+            #bar-control label
+            {
+                font-weight: bold;
+                vertical-align: middle;
+            }
+            #bar-control .option
+            {
+                vertical-align: middle;
+                text-transform: lowercase;
+            }
+            #bar-control input[type="checkbox"]
+            {
+                padding: 0 2px 0 3px;
+            }
+            #bar-control input
+            {
+                vertical-align: top;
+                height: 12px;
+                margin: 0px;
+                padding: 0px;
+            }
+            #bar-control div
+            {
+                float: right;
+                margin: 3px 5px 3px 5px;
+            }
+
+            /* timeline view */
+            #timelineview
+            {
+                padding-top: 5px;
+            }
+            table.timelineview a
+            {
+                height: 20px;
+            }
+            table.timelineview td
+            {
+                vertical-align: bottom;
+                padding: 0px 1px 0px 0px;
+                border: 0px;
+            }
+            tr.thread-items-row
+            {
+                height: 25px;
+            }
+            tr.thread-items-row td
+            {
+                vertical-align: bottom;
+            }
+            td.thread-label
+            {
+                padding: 0px 6px 0px 6px;
+                text-align: right;
+                line-height: 18px;
+                vertical-align: bottom;
+            }
+            th.thread-label
+            {
+                padding: 3px 6px 0px 6px;
+                line-height: 18px;
+                text-align: left;
+                vertical-align: bottom;
+            }
+        </style>
+	</head>
+	<body>
+        <h1>BookShop.AcceptanceTests Test Execution Report</h1>
+        
+    <ul>
+        <li>Project: BookShop.AcceptanceTests</li>
+        <li>Configuration: BookShop.AcceptanceTests</li>
+        <li>Test Assemblies: BookShop.AcceptanceTests.dll</li>
+        <li>Start Time: 16/10/2020 22:28:43</li>
+        <li>Duration: 00:00:05.5216385</li>
+        <li>Test Threads: 1</li>
+    </ul>
+
+
+        <h2>Result: 2 failed</h2>
+        <table class="testEvents">
+                <tr>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+                <td>
+            83%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 166px;" 
+           title="15 succeeded" 
+                   ></a>
+    </td>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 21px;" 
+           title="2 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+    <td>
+        <a class="bar colorPending" 
+           style="width: 10px;" 
+           title="1 pending" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>18</td>
+    <td>15</td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+
+        </table>
+        
+        <h2>Test Timeline Summary</h2>
+
+        <div id="timelineview" class="viewbox">
+            <div class="scrollable">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="thread-label" colspan="2">thread</th>
+                    </tr>
+                        <tr class="thread-items-row">
+                            <td class="thread-label" title="Machine: JOSE-CADIMA-PC">#0</td>
+                            <td colspan="2">
+                                <table class="timelineview" cellpadding="0" cellspacing="0">
+                                    <tr>
+
+                                            <td>
+        <a
+            class="bar startupBar" 
+            style="width: 15px;" 
+                title="test thread startup" 
+        >&nbsp;</a>
+    </td>
+
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 57px;" 
+                title="The author, the title and the price of a book can be seen (in Displaying book details)" 
+                href="#t1827200199.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Title should be matched (in Searching for books)" 
+                href="#t829795012.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Author should be matched (in Searching for books)" 
+                href="#t118960765.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Space should be treated as multiple OR search (in Searching for books)" 
+                href="#t-29418170.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Search result should be ordered by book title (in Searching for books)" 
+                href="#t-1900133810.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Simple search (scenario outline syntax), Domain (in Searching for books)" 
+                href="#t-77287166.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Simple search (scenario outline syntax), Windows Communication (in Searching for books)" 
+                href="#t333913921.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorFailed" 
+            style="width: 3px;" 
+                title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (in Desplegar libros en la pantalla)" 
+                href="#t2128712348.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax) (in Desplegar libros en la pantalla)" 
+                href="#t-1497208894.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorFailed" 
+            style="width: 3px;" 
+                title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax) (in Desplegar libros en la pantalla)" 
+                href="#t1904139702.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Books can be placed into shopping cart (in Adding books to the shopping cart)" 
+                href="#t-891769666.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Adding the same book to shopping cart again should increase quantity (in Adding books to the shopping cart)" 
+                href="#t-2137607870.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Shopping cart should show total number of items and total price (in Displaying the shopping cart)" 
+                href="#t583598782.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorPending" 
+            style="width: 3px;" 
+                title="The shopping cart should be initially empty (in Displaying the shopping cart)" 
+                href="#t-2007802835.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Quantity of a book can be changed (in Editing the shopping cart)" 
+                href="#t696054913.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Changing quantity of book to 0 should remove book from shopping cart (in Editing the shopping cart)" 
+                href="#t-1179762247.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="A type of book can be entirely removed from the shopping cart (in Removing books from the shopping cart)" 
+                href="#t935682760.0"
+        >&nbsp;</a>
+    </td>
+    <td>
+        <a
+            class="bar colorSucceeded" 
+            style="width: 3px;" 
+                title="Setup basic example books (in Prepare book catalog)" 
+                href="#t-600311013.0"
+        >&nbsp;</a>
+    </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    <tr class="horizontal-scale">
+                        <td>&nbsp;</td>
+                            <td class="scale-10-label" style="width: 91px;min-width: 91px;">0s</td>
+                        <td class="scale-10-label">4s</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        
+    <h2>Test Result View</h2>
+    <div id="testview" class="viewbox">
+        <div id="bar-control">
+            <div id="bar-control-sort">
+                <label>sort by:</label>
+                <span class="option"><input type="radio" name="barSortOrder" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="acttime" />Act Time</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="order" />Execution</span>
+                <span class="option"><input type="radio" name="barSortOrder" value="rescode" checked="checked" />Result</span>
+                <span class="option"><input type="checkbox" name="barSortDesc" id="barSortDesc" checked="checked" />desc</span>
+            </div>
+            <div id="bar-control-heights">
+                <label>heights:</label>
+                <span class="option"><input type="radio" checked="checked" name="barHeight" value="exectime" />Time</span>
+                <span class="option"><input type="radio" name="barHeight" value="acttime" />Act Time</span>
+            </div>
+        </div>
+        <table class="vertical-scale" cellpadding="0" cellspacing="0">
+            <tr class="scale-max">
+                <td class="left-padding scale-max-label">&nbsp;</td>
+                <td colspan="18">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-mid">
+                <td class="left-padding scale-mid-label">&nbsp;</td>
+                <td colspan="18">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+            <tr class="scale-min">
+                <td class="left-padding scale-min-label">&nbsp;</td>
+                <td colspan="18">&nbsp;</td>
+                <td class="right-padding">&nbsp;</td>
+            </tr>
+        </table>
+        <div class="scrollable">
+            <table class="testview-items" cellpadding="0" cellspacing="0">
+                <tr class="testview-items-row">
+                    <td class="left-padding">&nbsp;</td>
+    <td class="testview-item" 
+        data-sr-exectime="2.0606596" data-sr-rescode="110" data-sr-order="0" data-sr-acttime="0.137">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 60px;"
+            title="The author, the title and the price of a book can be seen (in Displaying book details)"
+            href="#t1827200199.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.189919" data-sr-rescode="110" data-sr-order="1" data-sr-acttime="0.077">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 6px;"
+            title="Title should be matched (in Searching for books)"
+            href="#t829795012.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.086986" data-sr-rescode="110" data-sr-order="2" data-sr-acttime="0.017">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 3px;"
+            title="Author should be matched (in Searching for books)"
+            href="#t118960765.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0519805" data-sr-rescode="110" data-sr-order="3" data-sr-acttime="0.029">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Space should be treated as multiple OR search (in Searching for books)"
+            href="#t-29418170.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.040811" data-sr-rescode="110" data-sr-order="4" data-sr-acttime="0.004">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Search result should be ordered by book title (in Searching for books)"
+            href="#t-1900133810.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0383643" data-sr-rescode="110" data-sr-order="5" data-sr-acttime="0.003">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Simple search (scenario outline syntax), Domain (in Searching for books)"
+            href="#t-77287166.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0295029" data-sr-rescode="110" data-sr-order="6" data-sr-acttime="0.003">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Simple search (scenario outline syntax), Windows Communication (in Searching for books)"
+            href="#t333913921.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0338911" data-sr-rescode="110" data-sr-order="8" data-sr-acttime="0.003">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax) (in Desplegar libros en la pantalla)"
+            href="#t-1497208894.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.3525814" data-sr-rescode="110" data-sr-order="10" data-sr-acttime="0.016">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 10px;"
+            title="Books can be placed into shopping cart (in Adding books to the shopping cart)"
+            href="#t-891769666.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0391771" data-sr-rescode="110" data-sr-order="11" data-sr-acttime="0.007">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Adding the same book to shopping cart again should increase quantity (in Adding books to the shopping cart)"
+            href="#t-2137607870.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0470254" data-sr-rescode="110" data-sr-order="12" data-sr-acttime="0.011">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Shopping cart should show total number of items and total price (in Displaying the shopping cart)"
+            href="#t583598782.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0543091" data-sr-rescode="110" data-sr-order="14" data-sr-acttime="0.006">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Quantity of a book can be changed (in Editing the shopping cart)"
+            href="#t696054913.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0265521" data-sr-rescode="110" data-sr-order="15" data-sr-acttime="0.003">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Changing quantity of book to 0 should remove book from shopping cart (in Editing the shopping cart)"
+            href="#t-1179762247.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0378003" data-sr-rescode="110" data-sr-order="16" data-sr-acttime="0.005">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="A type of book can be entirely removed from the shopping cart (in Removing books from the shopping cart)"
+            href="#t935682760.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0255925" data-sr-rescode="110" data-sr-order="17" data-sr-acttime="0.0">
+        <a
+            class="bar colorSucceeded" 
+            style="height: 2px;"
+            title="Setup basic example books (in Prepare book catalog)"
+            href="#t-600311013.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0566696" data-sr-rescode="310" data-sr-order="13" data-sr-acttime="0.02">
+        <a
+            class="bar colorPending" 
+            style="height: 2px;"
+            title="The shopping cart should be initially empty (in Displaying the shopping cart)"
+            href="#t-2007802835.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.3493026" data-sr-rescode="540" data-sr-order="7" data-sr-acttime="0.029">
+        <a
+            class="bar colorFailed" 
+            style="height: 10px;"
+            title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (in Desplegar libros en la pantalla)"
+            href="#t2128712348.0">&nbsp;</a>
+    </td>
+    <td class="testview-item" 
+        data-sr-exectime="0.0365773" data-sr-rescode="540" data-sr-order="9" data-sr-acttime="0.005">
+        <a
+            class="bar colorFailed" 
+            style="height: 2px;"
+            title="Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax) (in Desplegar libros en la pantalla)"
+            href="#t1904139702.0">&nbsp;</a>
+    </td>
+                    <td class="right-padding">&nbsp;</td>
+                </tr>
+                <tr class="horizontal-scale">
+                    <td class="left-padding">&nbsp;</td>
+                    <td colspan="10">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+        
+        
+    <h2>Feature Summary</h2>
+    <table class="testEvents">
+            <tr>
+            <th>Feature</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+
+            <tr>
+                <td><a href="#f-1132632010">Adding books to the shopping cart (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="2 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.3917585</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f1085951396">Desplegar libros en la pantalla (target: Integrated)</a></td>
+                    <td>
+            33%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 66px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 132px;" 
+           title="2 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>3</td>
+    <td>1</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.4197710</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1368147562">Displaying book details (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:02.0606596</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-2126018836">Displaying the shopping cart (target: Integrated)</a></td>
+                    <td>
+            50%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 99px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+    <td>
+        <a class="bar colorPending" 
+           style="width: 99px;" 
+           title="1 pending" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.1036950</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1668980378">Editing the shopping cart (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="2 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>2</td>
+    <td>2</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0808612</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-852639020">Prepare book catalog (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0255925</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1780775137">Removing books from the shopping cart (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0378003</td>
+
+            </tr>
+            <tr>
+                <td><a href="#f-1334875672">Searching for books (target: Integrated)</a></td>
+                    <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="6 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>6</td>
+    <td>6</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.4375637</td>
+
+            </tr>
+    </table>
+
+
+        <a name="error_summary" />
+        <h2>Error Summary</h2>
+        <table class="testEvents">
+                <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+    </tr>
+
+                <tr>
+                    <td>
+                        <a href="#t2128712348.0">Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (in BookShop.AcceptanceTests, Desplegar libros en la pantalla)</a>
+                    </td>
+                        <td>
+            0%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 199px;" 
+           title="1 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td colspan="9" style="padding-left: 20px;"><div class="errorMessage">Error: Expected shownBooks.Select(b =&gt; b.Title) {&quot;La metamorfosis&quot;, &quot;La tolla del mojado&quot;, &quot;Programacion en Java&quot;} to contain &quot;La metamorfosis AAASDFD&quot;.</div></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#t1904139702.0">Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax) (in BookShop.AcceptanceTests, Desplegar libros en la pantalla)</a>
+                    </td>
+                        <td>
+            0%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 199px;" 
+           title="1 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+
+                </tr>
+                <tr>
+                    <td colspan="9" style="padding-left: 20px;"><div class="errorMessage">Error: Expected item[1] to be 
+&quot;La metamorfosisFGFGFDFG&quot; with a length of 23, but 
+&quot;La metamorfosis&quot; has a length of 15, differs near &quot;s&quot; (index 14).
+
+With configuration:
+- Use declared types and members
+- Compare enums by value
+- Include all non-private properties
+- Include all non-private fields
+- Match member by name (or throw)
+- Without automatic conversion.
+- Without automatic conversion.
+- Be strict about the order of items in byte arrays
+</div></td>
+                </tr>
+        </table>
+
+        <h2>Scenario Summary</h2>
+            <a name="f-1132632010" />
+            <h3>Feature: Adding books to the shopping cart (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to collect books in a shopping cart
+	So that I can order several books at once.</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t-891769666.0">Scenario: Books can be placed into shopping cart</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.3525814</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-2137607870.0">Scenario: Adding the same book to shopping cart again should increase quantity</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0391771</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f1085951396" />
+            <h3>Feature: Desplegar libros en la pantalla (target: Integrated)</h3>
+                <div class="description"><pre>	Como pontencial cliente
+	Quiero ver los libros con el mejor precio
+	Para ahorra dinero comprando libros con descuentos	</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t2128712348.0">Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio</a>
+
+                        </td>
+                        
+                            <td>
+            0%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 199px;" 
+           title="1 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.3493026</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-1497208894.0">Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax)</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0338911</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t1904139702.0">Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax)</a>
+
+                        </td>
+                        
+                            <td>
+            0%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorFailed" 
+           style="width: 199px;" 
+           title="1 failed" 
+                          href="#error_summary"
+        ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0365773</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-1368147562" />
+            <h3>Feature: Displaying book details (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to see the details of a book
+	So that I can better decide to buy it.</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t1827200199.0">Scenario: The author, the title and the price of a book can be seen</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:02.0606596</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-2126018836" />
+            <h3>Feature: Displaying the shopping cart (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to collect books in a shopping cart
+	So that I can order several books at once.
+
+***Mockup:***
+![Shopping Cart Mockup](./Wireframes/ShoppingCart.png)</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t583598782.0">Scenario: Shopping cart should show total number of items and total price</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0470254</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-2007802835.0">Scenario: The shopping cart should be initially empty</a>
+
+                        </td>
+                        
+                            <td>
+            0%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorPending" 
+           style="width: 199px;" 
+           title="1 pending" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0566696</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-1668980378" />
+            <h3>Feature: Editing the shopping cart (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to collect books in a shopping cart
+	So that I can order several books at once.
+
+***Mockup:***
+![Shopping Cart Mockup](./Wireframes/ShoppingCart.png)</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t696054913.0">Scenario: Quantity of a book can be changed</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0543091</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-1179762247.0">Scenario: Changing quantity of book to 0 should remove book from shopping cart</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0265521</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-852639020" />
+            <h3>Feature: Prepare book catalog (target: Integrated)</h3>
+                <div class="description"><pre>	prepare catalog with a list of books required for manual testing</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t-600311013.0">Scenario: Setup basic example books</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0255925</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-1780775137" />
+            <h3>Feature: Removing books from the shopping cart (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to collect books in a shopping cart
+	So that I can order several books at once.
+
+***Mockup:***
+![Shopping Cart Mockup](./Wireframes/ShoppingCart.png)</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t935682760.0">Scenario: A type of book can be entirely removed from the shopping cart</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0378003</td>
+
+                        
+                    </tr>
+            </table>
+            <a name="f-1334875672" />
+            <h3>Feature: Searching for books (target: Integrated)</h3>
+                <div class="description"><pre>	As a potential customer
+	I want to search for books by a simple phrase
+	So that I can easily allocate books by something I remember from them.
+
+The search input is located on the [Home Screen](&lt;BookShop.AcceptanceTests/Features/Home Screen.feature&gt;)</pre>
+                </div>
+            <table class="testEvents">
+                    <tr>
+            <th>Test</th>
+        <th colspan="2">Success rate</th>
+        <th>Tests</th>
+        <th>Succeeded</th>
+        <th>Failed</th>
+        <th>Pending</th>
+        <th>Ignored</th>
+        <th>Skipped</th>
+            <th>Duration</th>
+    </tr>
+
+                    <tr>
+                        <td>
+                                    <a href="#t829795012.0">Scenario: Title should be matched</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.1899190</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t118960765.0">Scenario: Author should be matched</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0869860</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-29418170.0">Scenario: Space should be treated as multiple OR search</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0519805</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-1900133810.0">Scenario: Search result should be ordered by book title</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0408110</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t-77287166.0">Scenario: Simple search (scenario outline syntax), Domain</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0383643</td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                                    <a href="#t333913921.0">Scenario: Simple search (scenario outline syntax), Windows Communication</a>
+
+                        </td>
+                        
+                            <td>
+            100%
+    </td>
+    <td>
+            <table class="timelineview" cellpadding="0" cellspacing="0">
+        <tr>
+    <td>
+        <a class="bar colorSucceeded" 
+           style="width: 199px;" 
+           title="1 succeeded" 
+                   ></a>
+    </td>
+        </tr>
+    </table>
+
+    </td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+        <td>00:00:00.0295029</td>
+
+                        
+                    </tr>
+            </table>
+
+        <h2>Execution Details</h2>
+            <a name="t1827200199.0" />
+            <h3>Scenario: The author, the title and the price of a book can be seen (in BookShop.AcceptanceTests, Displaying book details)</h3>
+                <div class="description">
+                    tags: WI10, automated, WI9
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:45</li>
+                <li>Execution time (sec): 2,0606596</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              | Price |
+  | Martin Fowler | Analysis Patterns                  | 50.20 |
+  | Eric Evans    | Domain Driven Design               | 46.34 |
+  | Ted Pattison  | Inside Windows SharePoint Services | 31.49 |
+  | Gojko Adzic   | Bridging the Communication Gap     | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - The author, the title and the price of a book can be seen] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,1s)</pre>
+                        </td>
+                        <td>Succeeded in 1.812s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I open the details of &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - The author, the title and the price of a book can be seen] -->
+                            <pre class="log">done: BookSteps.WhenIOpenTheDetailsOfBook(&quot;Analysis Patterns&quot;) (0,1s)</pre>
+                        </td>
+                        <td>Succeeded in 0.137s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the book details should show
+  --- table step argument ---
+  | Author        | Title             | Price |
+  | Martin Fowler | Analysis Patterns | 50.20 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - The author, the title and the price of a book can be seen] -->
+                            <pre class="log">done: BookSteps.ThenTheBookDetailsShouldShow(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.017s</td>
+                    </tr>
+            </table>
+            <a name="t829795012.0" />
+            <h3>Scenario: Title should be matched (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI1, WI3
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,189919</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Title should be matched] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.022s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;Domain&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Title should be matched] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;Domain&quot;) (0,1s)</pre>
+                        </td>
+                        <td>Succeeded in 0.077s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should contain only: &#39;Domain Driven Design&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Title should be matched] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly(&quot;'Domain Driven De...&quot;) (0,1s)</pre>
+                        </td>
+                        <td>Succeeded in 0.082s</td>
+                    </tr>
+            </table>
+            <a name="t118960765.0" />
+            <h3>Scenario: Author should be matched (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI1, WI4
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,086986</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Author should be matched] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.052s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;Fowler&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Author should be matched] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;Fowler&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.017s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should contain only: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Author should be matched] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly(&quot;'Analysis Patterns'&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.008s</td>
+                    </tr>
+            </table>
+            <a name="t-29418170.0" />
+            <h3>Scenario: Space should be treated as multiple OR search (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI1, WI5
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,0519805</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Space should be treated as multiple OR search] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.018s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;Windows Communication&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Space should be treated as multiple OR search] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;Windows Communica...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.029s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should contain only: &#39;Bridging the Communication Gap&#39;, &#39;Inside Windows SharePoint Services&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Space should be treated as multiple OR search] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly(&quot;'Bridging the Com...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+            </table>
+            <a name="t-1900133810.0" />
+            <h3>Scenario: Search result should be ordered by book title (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI2, WI6
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,040811</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Search result should be ordered by book title] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.014s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;id&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Search result should be ordered by book title] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;id&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should be:
+  --- table step argument ---
+  | Title                              |
+  | Bridging the Communication Gap     |
+  | Inside Windows SharePoint Services |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Search result should be ordered by book title] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldBe(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.018s</td>
+                    </tr>
+            </table>
+            <a name="t-77287166.0" />
+            <h3>Scenario: Simple search (scenario outline syntax), Domain (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI1, WI5, alternative_syntax
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,0383643</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Simple search (scenario outline syntax), Domain] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.022s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;Domain&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Simple search (scenario outline syntax), Domain] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;Domain&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should contain only: &#39;Domain Driven Design&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Simple search (scenario outline syntax), Domain] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly(&quot;'Domain Driven De...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.012s</td>
+                    </tr>
+            </table>
+            <a name="t333913921.0" />
+            <h3>Scenario: Simple search (scenario outline syntax), Windows Communication (in BookShop.AcceptanceTests, Searching for books)</h3>
+                <div class="description">
+                    tags: WI1, WI5, alternative_syntax
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,0295029</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author        | Title                              |
+  | Martin Fowler | Analysis Patterns                  |
+  | Eric Evans    | Domain Driven Design               |
+  | Ted Pattison  | Inside Windows SharePoint Services |
+  | Gojko Adzic   | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Simple search (scenario outline syntax), Windows Communication] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.016s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I search for books by the phrase &#39;Windows Communication&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Simple search (scenario outline syntax), Windows Communication] -->
+                            <pre class="log">done: SearchSteps.WhenISearchForBooksByThePhrase(&quot;Windows Communica...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then the list of found books should contain only: &#39;Bridging the Communication Gap&#39;, &#39;Inside Windows SharePoint Services&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Simple search (scenario outline syntax), Windows Communication] -->
+                            <pre class="log">done: SearchSteps.ThenTheListOfFoundBooksShouldContainOnly(&quot;'Bridging the Com...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+            </table>
+            <a name="t2128712348.0" />
+            <h3>Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (in BookShop.AcceptanceTests, Desplegar libros en la pantalla)</h3>
+                <div class="description">
+                    tags: WI8, automated, WI7
+                </div>
+            <ul>
+                <li>Status: Failed</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,3493026</li>
+                <li>Thread: #0</li>
+                <li>Error: Expected shownBooks.Select(b =&gt; b.Title) {&quot;La metamorfosis&quot;, &quot;La tolla del mojado&quot;, &quot;Programacion en Java&quot;} to contain &quot;La metamorfosis AAASDFD&quot;.</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                | Price |
+  | 100 a�os de soledad  | 50.20 |
+  | Programacion en Java | 46.34 |
+  | La metamorfosis      | 31.49 |
+  | La tolla del mojado  | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.017s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When Ingreso a la tienda virtual</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio] -->
+                            <pre class="log">done: HomeSteps.WhenIEnterTheShop() (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.029s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then La pantalla de inicio deberia mostrar el libro &#39;La tolla del mojado&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio] -->
+                            <pre class="log">done: HomeSteps.ThenTheHomeScreenShouldShowTheBook(&quot;La tolla del mojado&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And La pantalla de inicio deberia mostrar el libro &#39;La metamorfosis AAASDFD&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio] -->
+                            <pre class="log">error: Expected shownBooks.Select(b =&gt; b.Title) {&quot;La metamorfosis&quot;, &quot;La tolla del mojado&quot;, &quot;Programacion en Java&quot;} to contain &quot;La metamorfosis AAASDFD&quot;.</pre>
+                                <div class="errorMessage">Expected shownBooks.Select(b =&gt; b.Title) {&quot;La metamorfosis&quot;, &quot;La tolla del mojado&quot;, &quot;Programacion en Java&quot;} to contain &quot;La metamorfosis AAASDFD&quot;.</div>
+                                <pre class="stackTrace">FluentAssertions.Execution.AssertionFailedException: Expected shownBooks.Select(b =&gt; b.Title) {&quot;La metamorfosis&quot;, &quot;La tolla del mojado&quot;, &quot;Programacion en Java&quot;} to contain &quot;La metamorfosis AAASDFD&quot;.
+   at FluentAssertions.Execution.FallbackTestFramework.Throw(String message)
+   at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)
+   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)
+   at FluentAssertions.Execution.AssertionScope.FailWith(Func`1 failReasonFunc)
+   at FluentAssertions.Execution.AssertionScope.FailWith(String message, Object[] args)
+   at FluentAssertions.Collections.SelfReferencingCollectionAssertions`2.Contain(T expected, String because, Object[] becauseArgs)
+   at BookShop.AcceptanceTests.Drivers.Integrated.BookAssertions.HomeScreenShouldShow(IEnumerable`1 shownBooks, String expectedTitle) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Drivers\Integrated\BookAssertions.cs:line 22
+   at BookShop.AcceptanceTests.Drivers.Integrated.IntegratedHomeDriver.ShowsBook(String expectedTitle) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Drivers\Integrated\IntegratedHomeDriver.cs:line 33
+   at BookShop.AcceptanceTests.StepDefinitions.HomeSteps.ThenTheHomeScreenShouldShowTheBook(String expectedTitle) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\StepDefinitions\HomeSteps.cs:line 25
+   at lambda_method(Closure , IContextManager , String )
+   at TechTalk.SpecFlow.Bindings.BindingInvoker.InvokeBinding(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, TimeSpan&amp; duration)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStepMatch(BindingMatch match, Object[] arguments)
+   at TechTalk.SpecRun.SpecFlowPlugin.Runtime.RunnerTestExecutionEngine.ExecuteStepMatch(BindingMatch match, Object[] arguments)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStep(IContextManager contextManager, StepInstance stepInstance)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep()
+   at TechTalk.SpecRun.SpecFlowPlugin.Runtime.RunnerTestExecutionEngine.OnAfterLastStep()
+   at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors()
+   at BookShop.AcceptanceTests.Features.DesplegarLibrosEnLaPantallaFeature.ScenarioCleanup()
+   at BookShop.AcceptanceTests.Features.DesplegarLibrosEnLaPantallaFeature.Los3LibrosMasBaratosSeDeberianMostrarEnLApantallaDeInicio() in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Features\Home Screen.feature:line 21
+   at TechTalk.SpecRun.Framework.TaskExecutors.StaticOrInstanceMethodExecutor.ExecuteInternal(ITestThreadExecutionContext testThreadExecutionContext)
+   at TechTalk.SpecRun.Framework.TaskExecutors.StaticOrInstanceMethodExecutor.Execute(ITestThreadExecutionContext testThreadExecutionContext)
+   at TechTalk.SpecRun.Framework.TestNodeTask.Execute()</pre>
+                        </td>
+                        <td>Failed in 0.246s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And La pantalla de inicio deberia mostrar el libro &#39;Programacion en Java&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio] -->
+                            <pre class="log">skipped because of previous errors</pre>
+                        </td>
+                        <td>Skipped in 0.039s</td>
+                    </tr>
+            </table>
+            <a name="t-1497208894.0" />
+            <h3>Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax) (in BookShop.AcceptanceTests, Desplegar libros en la pantalla)</h3>
+                <div class="description">
+                    tags: alternative_syntax, WI8, automated, WI7
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,0338911</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                | Price |
+  | 100 a�os de soledad  | 50.20 |
+  | Programacion en Java | 46.34 |
+  | La metamorfosis      | 31.49 |
+  | La tolla del mojado  | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax)] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.021s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When Ingreso a la tienda virtual</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax)] -->
+                            <pre class="log">done: HomeSteps.WhenIEnterTheShop() (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then La pantalla de inicio deberia mostrar los libros &#39;La tolla del mojado&#39;, &#39;La metamorfosis&#39;, &#39;Programacion en Java&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (list syntax)] -->
+                            <pre class="log">done: HomeSteps.ThenTheHomeScreenShouldShowTheBooks(&quot;'La tolla del moj...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.007s</td>
+                    </tr>
+            </table>
+            <a name="t1904139702.0" />
+            <h3>Scenario: Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax) (in BookShop.AcceptanceTests, Desplegar libros en la pantalla)</h3>
+                <div class="description">
+                    tags: alternative_syntax, WI8, automated, WI7
+                </div>
+            <ul>
+                <li>Status: Failed</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,0365773</li>
+                <li>Thread: #0</li>
+                <li>Error: Expected item[1] to be 
+&quot;La metamorfosisFGFGFDFG&quot; with a length of 23, but 
+&quot;La metamorfosis&quot; has a length of 15, differs near &quot;s&quot; (index 14).
+
+With configuration:
+- Use declared types and members
+- Compare enums by value
+- Include all non-private properties
+- Include all non-private fields
+- Match member by name (or throw)
+- Without automatic conversion.
+- Without automatic conversion.
+- Be strict about the order of items in byte arrays
+</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                | Price |
+  | 100 a�os de soledad  | 50.20 |
+  | Programacion en Java | 46.34 |
+  | La metamorfosis      | 31.49 |
+  | La tolla del mojado  | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax)] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.015s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When Ingreso a la tienda virtual</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax)] -->
+                            <pre class="log">done: HomeSteps.WhenIEnterTheShop() (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then La pantalla de inicio deberia mostrar los libros
+  --- table step argument ---
+  | Title                   |
+  | La tolla del mojado     |
+  | La metamorfosisFGFGFDFG |
+  | Programacion en Java    |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Los 3 libros mas baratos se deberian mostrar en l apantalla de inicio (table syntax)] -->
+                            <pre class="log">error: Expected item[1] to be 
+&quot;La metamorfosisFGFGFDFG&quot; with a length of 23, but 
+&quot;La metamorfosis&quot; has a length of 15, differs near &quot;s&quot; (index 14).
+
+With configuration:
+- Use declared types and members
+- Compare enums by value
+- Include all non-private properties
+- Include all non-private fields
+- Match member by name (or throw)
+- Without automatic conversion.
+- Without automatic conversion.
+- Be strict about the order of items in byte arrays</pre>
+                                <div class="errorMessage">Expected item[1] to be 
+&quot;La metamorfosisFGFGFDFG&quot; with a length of 23, but 
+&quot;La metamorfosis&quot; has a length of 15, differs near &quot;s&quot; (index 14).
+
+With configuration:
+- Use declared types and members
+- Compare enums by value
+- Include all non-private properties
+- Include all non-private fields
+- Match member by name (or throw)
+- Without automatic conversion.
+- Without automatic conversion.
+- Be strict about the order of items in byte arrays
+</div>
+                                <pre class="stackTrace">FluentAssertions.Execution.AssertionFailedException: Expected item[1] to be 
+&quot;La metamorfosisFGFGFDFG&quot; with a length of 23, but 
+&quot;La metamorfosis&quot; has a length of 15, differs near &quot;s&quot; (index 14).
+
+With configuration:
+- Use declared types and members
+- Compare enums by value
+- Include all non-private properties
+- Include all non-private fields
+- Match member by name (or throw)
+- Without automatic conversion.
+- Without automatic conversion.
+- Be strict about the order of items in byte arrays
+
+   at FluentAssertions.Execution.FallbackTestFramework.Throw(String message)
+   at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message)
+   at FluentAssertions.Execution.CollectingAssertionStrategy.ThrowIfAny(IDictionary`2 context)
+   at FluentAssertions.Execution.AssertionScope.Dispose()
+   at FluentAssertions.Equivalency.EquivalencyValidator.AssertEquality(EquivalencyValidationContext context)
+   at FluentAssertions.Collections.StringCollectionAssertions.BeEquivalentTo(IEnumerable`1 expectation, Func`2 config, String because, Object[] becauseArgs)
+   at FluentAssertions.Collections.StringCollectionAssertions.BeEquivalentTo(IEnumerable`1 expectation, String because, Object[] becauseArgs)
+   at BookShop.AcceptanceTests.Drivers.Integrated.BookAssertions.HomeScreenShouldShow(IEnumerable`1 shownBooks, IEnumerable`1 expectedTitles) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Drivers\Integrated\BookAssertions.cs:line 27
+   at BookShop.AcceptanceTests.Drivers.Integrated.IntegratedHomeDriver.ShowsBooks(IEnumerable`1 expectedTitles) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Drivers\Integrated\IntegratedHomeDriver.cs:line 48
+   at BookShop.AcceptanceTests.Drivers.Integrated.IntegratedHomeDriver.ShowsBooks(Table expectedBooks) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Drivers\Integrated\IntegratedHomeDriver.cs:line 41
+   at BookShop.AcceptanceTests.StepDefinitions.HomeSteps.ThenTheHomeScreenShouldShowTheFollowingBooks(Table expectedBooks) in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\StepDefinitions\HomeSteps.cs:line 37
+   at lambda_method(Closure , IContextManager , Table )
+   at TechTalk.SpecFlow.Bindings.BindingInvoker.InvokeBinding(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, TimeSpan&amp; duration)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStepMatch(BindingMatch match, Object[] arguments)
+   at TechTalk.SpecRun.SpecFlowPlugin.Runtime.RunnerTestExecutionEngine.ExecuteStepMatch(BindingMatch match, Object[] arguments)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.ExecuteStep(IContextManager contextManager, StepInstance stepInstance)
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep()
+   at TechTalk.SpecRun.SpecFlowPlugin.Runtime.RunnerTestExecutionEngine.OnAfterLastStep()
+   at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors()
+   at BookShop.AcceptanceTests.Features.DesplegarLibrosEnLaPantallaFeature.ScenarioCleanup()
+   at BookShop.AcceptanceTests.Features.DesplegarLibrosEnLaPantallaFeature.Los3LibrosMasBaratosSeDeberianMostrarEnLApantallaDeInicioTableSyntax() in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\Features\Home Screen.feature:line 33
+   at TechTalk.SpecRun.Framework.TaskExecutors.StaticOrInstanceMethodExecutor.ExecuteInternal(ITestThreadExecutionContext testThreadExecutionContext)
+   at TechTalk.SpecRun.Framework.TaskExecutors.StaticOrInstanceMethodExecutor.Execute(ITestThreadExecutionContext testThreadExecutionContext)
+   at TechTalk.SpecRun.Framework.TestNodeTask.Execute()</pre>
+                        </td>
+                        <td>Failed in 0.015s</td>
+                    </tr>
+            </table>
+            <a name="t-891769666.0" />
+            <h3>Scenario: Books can be placed into shopping cart (in BookShop.AcceptanceTests, Adding books to the shopping cart)</h3>
+                <div class="description">
+                    tags: WI12, automated, WI11
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:47</li>
+                <li>Execution time (sec): 0,3525814</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              |
+  | Analysis Patterns                  |
+  | Domain Driven Design               |
+  | Inside Windows SharePoint Services |
+  | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.019s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns&quot;) (0,3s)</pre>
+                        </td>
+                        <td>Succeeded in 0.266s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I place &#39;Domain Driven Design&#39; into the shopping cart</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart(&quot;Domain Driven Design&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.016s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should contain 2 types of items</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(2) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.033s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should contain 1 copy of &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(1, &quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.011s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should contain 1 copy of &#39;Domain Driven Design&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Books can be placed into shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(1, &quot;Domain Driven Design&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+            </table>
+            <a name="t-2137607870.0" />
+            <h3>Scenario: Adding the same book to shopping cart again should increase quantity (in BookShop.AcceptanceTests, Adding books to the shopping cart)</h3>
+                <div class="description">
+                    tags: WI13, automated, WI11
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0391771</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              |
+  | Analysis Patterns                  |
+  | Domain Driven Design               |
+  | Inside Windows SharePoint Services |
+  | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Adding the same book to shopping cart again should increase quantity] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.014s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Adding the same book to shopping cart again should increase quantity] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I place &#39;Analysis Patterns&#39; into the shopping cart</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Adding the same book to shopping cart again should increase quantity] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.007s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should contain 1 type of item</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Adding the same book to shopping cart again should increase quantity] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(1) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should contain 2 copies of &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Adding the same book to shopping cart again should increase quantity] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(2, &quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+            </table>
+            <a name="t583598782.0" />
+            <h3>Scenario: Shopping cart should show total number of items and total price (in BookShop.AcceptanceTests, Displaying the shopping cart)</h3>
+                <div class="description">
+                    tags: WI15, automated, WI14
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0470254</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              | Price |
+  | Analysis Patterns                  | 50.20 |
+  | Domain Driven Design               | 46.34 |
+  | Inside Windows SharePoint Services | 31.49 |
+  | Bridging the Communication Gap     | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.012s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;, &#39;Domain Driven Design&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns...&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I place &#39;Analysis Patterns&#39; into the shopping cart</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIPlaceIntoTheShoppingCart(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.011s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should contain 2 types of items</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(2) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should contain 3 items in total</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainItemsInTotal(3) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should show a total price of 146.74</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Shopping cart should show total number of items and total price] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldShowATotalPriceOf(146,74) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+            </table>
+            <a name="t-2007802835.0" />
+            <h3>Scenario: The shopping cart should be initially empty (in BookShop.AcceptanceTests, Displaying the shopping cart)</h3>
+                <div class="description">
+                    tags: automated, WI14
+                </div>
+            <ul>
+                <li>Status: Pending</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0566696</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              | Price |
+  | Analysis Patterns                  | 50.20 |
+  | Domain Driven Design               | 46.34 |
+  | Inside Windows SharePoint Services | 31.49 |
+  | Bridging the Communication Gap     | 24.75 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - The shopping cart should be initially empty] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.025s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I enter the shop</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - The shopping cart should be initially empty] -->
+                            <pre class="log">No matching step definition found for the step. Use the following code to create one:
+        [When(@&quot;I enter the shop&quot;)]
+        public void WhenIEnterTheShop()
+        {
+            _scenarioContext.Pending();
+        }</pre>
+                        </td>
+                        <td>Pending in 0.02s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should be empty</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - The shopping cart should be initially empty] -->
+                            <pre class="log">skipped because of previous errors
+Pending: No matching step definition found for one or more steps.
+using System;
+using TechTalk.SpecFlow;
+
+namespace MyNamespace
+{
+    [Binding]
+    public class StepDefinitions
+    {
+        private readonly ScenarioContext _scenarioContext;
+
+        public StepDefinitions(ScenarioContext scenarioContext)
+        {
+            _scenarioContext = scenarioContext;
+        }
+        [When(@&quot;I enter the shop&quot;)]
+        public void WhenIEnterTheShop()
+        {
+            _scenarioContext.Pending();
+        }
+    }
+}</pre>
+                        </td>
+                        <td>Skipped in 0.01s</td>
+                    </tr>
+            </table>
+            <a name="t696054913.0" />
+            <h3>Scenario: Quantity of a book can be changed (in BookShop.AcceptanceTests, Editing the shopping cart)</h3>
+                <div class="description">
+                    tags: WI17, automated, WI16
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0543091</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              |
+  | Analysis Patterns                  |
+  | Domain Driven Design               |
+  | Inside Windows SharePoint Services |
+  | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Quantity of a book can be changed] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.013s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Quantity of a book can be changed] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I change the quantity of &#39;Analysis Patterns&#39; to 3</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Quantity of a book can be changed] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIChangeTheQuantityOfTo(&quot;Analysis Patterns&quot;, 3) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.006s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should contain 1 type of item</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Quantity of a book can be changed] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainTypesOfItems(1) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">And my shopping cart should contain 3 copies of &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Quantity of a book can be changed] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldContainCopiesOf(3, &quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.024s</td>
+                    </tr>
+            </table>
+            <a name="t-1179762247.0" />
+            <h3>Scenario: Changing quantity of book to 0 should remove book from shopping cart (in BookShop.AcceptanceTests, Editing the shopping cart)</h3>
+                <div class="description">
+                    tags: WI17, automated, WI16
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0265521</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              |
+  | Analysis Patterns                  |
+  | Domain Driven Design               |
+  | Inside Windows SharePoint Services |
+  | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Changing quantity of book to 0 should remove book from shopping cart] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.014s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Changing quantity of book to 0 should remove book from shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I change the quantity of &#39;Analysis Patterns&#39; to 0</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - Changing quantity of book to 0 should remove book from shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIChangeTheQuantityOfTo(&quot;Analysis Patterns&quot;, 0) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.003s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should be empty</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - Changing quantity of book to 0 should remove book from shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldBeEmpty() (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.004s</td>
+                    </tr>
+            </table>
+            <a name="t935682760.0" />
+            <h3>Scenario: A type of book can be entirely removed from the shopping cart (in BookShop.AcceptanceTests, Removing books from the shopping cart)</h3>
+                <div class="description">
+                    tags: WI18, automated
+                </div>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0378003</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Title                              |
+  | Analysis Patterns                  |
+  | Domain Driven Design               |
+  | Inside Windows SharePoint Services |
+  | Bridging the Communication Gap     |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - A type of book can be entirely removed from the shopping cart] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.013s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given I have a shopping cart with: &#39;Analysis Patterns&#39;</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - A type of book can be entirely removed from the shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.GivenIHaveAShoppingCartWith(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.006s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">When I delete &#39;Analysis Patterns&#39; from the shopping cart</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAct: Scenario - A type of book can be entirely removed from the shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.WhenIDeleteFromTheShoppingCart(&quot;Analysis Patterns&quot;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.005s</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Then my shopping cart should be empty</pre>
+                        </td>
+                        <td>
+                            <!-- [TestAssert: Scenario - A type of book can be entirely removed from the shopping cart] -->
+                            <pre class="log">done: ShoppingCartSteps.ThenMyShoppingCartShouldBeEmpty() (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.008s</td>
+                    </tr>
+            </table>
+            <a name="t-600311013.0" />
+            <h3>Scenario: Setup basic example books (in BookShop.AcceptanceTests, Prepare book catalog)</h3>
+            <ul>
+                <li>Status: Succeeded</li>
+                <li>Start time: 16/10/2020 22:28:48</li>
+                <li>Execution time (sec): 0,0255925</li>
+                <li>Thread: #0</li>
+            </ul>
+            <table class="testEvents">
+                <tr>
+                    <th>Steps</th>
+                    <th>Trace</th>
+                    <th>Result</th>
+                </tr>
+                    <tr>
+                        <td>
+                            <pre class="log">Given the following books
+  --- table step argument ---
+  | Author                         | Title                          | Price |
+  | Gojko Adzic                    | Bridging the Communication Gap | 12.20 |
+  | Gojko Adzic                    | Specification By Example       | 15.30 |
+  | Lisa Crispin and Janet Gregory | Agile Testing                  | 20.20 |
+  | Mitch Lacey                    | The Scrum Field Guide          | 15.31 |
+  | Martin Fowler                  | Refactoring                    | 29.55 |
+  | Esther Derby and Diana Larsen  | Agile Retrospectives           | 16.99 |
+  | Matt Wynne and Aslak Hellesoy  | The Cucumber Book              | 18.00 |
+  | David Chelimsky                | The RSpec Book                 | 17.50 |</pre>
+                        </td>
+                        <td>
+                            <!-- [TestArrange: Scenario - Setup basic example books] -->
+                            <pre class="log">done: BookSteps.GivenTheFollowingBooks(&lt;table&gt;) (0,0s)</pre>
+                        </td>
+                        <td>Succeeded in 0.022s</td>
+                    </tr>
+            </table>
+	</body>
+</html>

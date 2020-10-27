@@ -1,0 +1,27 @@
+﻿2020-10-16T20:29:49.4994891-04:00;VSTestExecutionThread;Info;SpecFlow+Runner execution started
+2020-10-16T20:29:49.4997481-04:00;VSTestExecutionThread;Info;SpecFlow+Runner 3.4.19 in Framework netcore31 in x86 mode execution started
+2020-10-16T20:29:49.4997516-04:00;VSTestExecutionThread;Info;TestAdapter Location: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\TechTalk.SpecRun.VisualStudio.TestAdapter.dll
+2020-10-16T20:29:49.5049661-04:00;VSTestExecutionThread;Info;Current UserName: 'Caribe', MachineName: 'JOSE-CADIMA-PC'
+2020-10-16T20:29:49.7937635-04:00;VSTestExecutionThread;Info;SpecRun: running tests in E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\BookShop.AcceptanceTests\bin\Debug\netcoreapp3.1\BookShop.AcceptanceTests.dll
+2020-10-16T20:29:49.7941542-04:00;VSTestExecutionThread;Info;Output folder configured to "E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\TestResults" (default)
+2020-10-16T20:29:49.7942971-04:00;VSTestExecutionThread;Info;Profile: BookShop.AcceptanceTests
+2020-10-16T20:29:49.8924105-04:00;VSTestExecutionThread;Info;Log file path: E:\Carpetas Joc 7u7\0TALLER DE EXAMEN DE GRADO\SpecFlow-Examples\ASP.NET-MVC\BookShop\TestResults\BookShop.AcceptanceTests_BookShop.AcceptanceTests_2020-10-16T202949.log
+2020-10-16T20:29:49.8994081-04:00;Thread#13;Info;Checking activation
+2020-10-16T20:29:52.4386601-04:00;Thread#13;Error;****************************************************************************************************************
+2020-10-16T20:29:52.4419653-04:00;Thread#13;Error;*                                           SpecFlow+ Runner                                                   *
+2020-10-16T20:29:52.4427181-04:00;Thread#13;Error;****************************************************************************************************************
+2020-10-16T20:29:52.4438020-04:00;Thread#13;Error;Please sign-up for your free SpecFlow account or sign-in with your already existing account here:
+2020-10-16T20:29:52.4441154-04:00;Thread#13;Error;https://account.specflow.org/clientactivation/welcome/Runner/B4DC631E02174A66BCC1D12EE4752D83063D61DBC4DCAA2025324DCFADFC52BB49B17E79/NotActivatedYet
+2020-10-16T20:29:52.4442836-04:00;Thread#13;Error;to execute your Scenarios again.
+2020-10-16T20:29:52.4450861-04:00;Thread#13;Error;If you are reading this message on a build agent, we couldn't recognize the agent.
+2020-10-16T20:29:52.4453680-04:00;Thread#13;Error;Please get in touch with us at support@specflow.org.
+2020-10-16T20:29:52.4457351-04:00;Thread#13;Error;****************************************************************************************************************
+2020-10-16T20:29:52.4518019-04:00;Thread#13;Error;No tests executed (activation needed)
+2020-10-16T20:29:52.4937113-04:00:Total: 0
+2020-10-16T20:29:52.4972348-04:00:Succeeded: 0
+2020-10-16T20:29:52.4976559-04:00:Ignored: 0
+2020-10-16T20:29:52.4979922-04:00:Pending: 0
+2020-10-16T20:29:52.4991347-04:00:Skipped: 0
+2020-10-16T20:29:52.4998563-04:00:Failed: 0
+2020-10-16T20:29:52.5117877-04:00;VSTestExecutionThread;Info;Adding attachments to VSTest
+========== End of log file ==========
